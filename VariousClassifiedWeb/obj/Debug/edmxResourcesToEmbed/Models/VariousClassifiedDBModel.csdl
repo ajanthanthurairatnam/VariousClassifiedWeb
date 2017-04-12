@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VariousClassifiedDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="VariousClassifiedDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="VariousClassifiedDBModel.Category" />
+    <EntitySet Name="Classifieds" EntityType="VariousClassifiedDBModel.Classified" />
+    <AssociationSet Name="FK_Classified_Category" Association="VariousClassifiedDBModel.FK_Classified_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Classified" EntitySet="Classifieds" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CategoryDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CategoryImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="Classifieds" Relationship="VariousClassifiedDBModel.FK_Classified_Category" FromRole="Category" ToRole="Classified" />
+  </EntityType>
+  <EntityType Name="Classified">
+    <Key>
+      <PropertyRef Name="ClassifiedID" />
+    </Key>
+    <Property Name="ClassifiedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClassifiedTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ClassifiedDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CategoryID" Type="Int32" />
+    <Property Name="ClassfiedImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FromDate" Type="DateTime" Precision="3" />
+    <Property Name="ToDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="Category" Relationship="VariousClassifiedDBModel.FK_Classified_Category" FromRole="Classified" ToRole="Category" />
+  </EntityType>
+  <Association Name="FK_Classified_Category">
+    <End Type="VariousClassifiedDBModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="VariousClassifiedDBModel.Classified" Role="Classified" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Classified">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
