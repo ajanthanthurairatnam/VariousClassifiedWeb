@@ -23,7 +23,7 @@ namespace VariousClassifiedWeb.Models
         public int ID { get; set; }
         public string CategoryTitle { get; set; }
         public string CategoryDescription { get; set; }
-        public byte[] CategoryImage { get; set; }
+        public string CategoryImage { get; set; }
         public Nullable<bool> IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -7,7 +7,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CategoryTitle" Type="varchar" MaxLength="50" />
     <Property Name="CategoryDescription" Type="varchar(max)" />
-    <Property Name="CategoryImage" Type="varbinary(max)" />
+    <Property Name="CategoryImage" Type="varchar(max)" />
     <Property Name="IsActive" Type="bit" />
   </EntityType>
   <EntityType Name="Classified">

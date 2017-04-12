@@ -1,17 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="VariousClassifiedDBModelStoreContainer" CdmEntityContainer="VariousClassifiedDBEntities">
-    <EntitySetMapping Name="Categories">
-      <EntityTypeMapping TypeName="VariousClassifiedDBModel.Category">
-        <MappingFragment StoreEntitySet="Category">
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="CategoryImage" ColumnName="CategoryImage" />
-          <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
-          <ScalarProperty Name="CategoryTitle" ColumnName="CategoryTitle" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Classifieds">
       <EntityTypeMapping TypeName="VariousClassifiedDBModel.Classified">
         <MappingFragment StoreEntitySet="Classified">
@@ -23,6 +12,17 @@
           <ScalarProperty Name="ClassifiedDescription" ColumnName="ClassifiedDescription" />
           <ScalarProperty Name="ClassifiedTitle" ColumnName="ClassifiedTitle" />
           <ScalarProperty Name="ClassifiedID" ColumnName="ClassifiedID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="VariousClassifiedDBModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CategoryImage" ColumnName="CategoryImage" />
+          <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+          <ScalarProperty Name="CategoryTitle" ColumnName="CategoryTitle" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
