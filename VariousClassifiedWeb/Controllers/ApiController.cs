@@ -31,6 +31,22 @@ namespace VariousClassifiedWeb.Controllers
         }
 
         // GET: Api
+        public JsonResult ClassifiedsByCategoryID(int? id)
+        {
+            if (id == null)
+            {
+                db.Configuration.ProxyCreationEnabled = false;
+                return Json(db.Classifieds.Select(x => new { x.CategoryID, x.ClassfiedImage, x.Category.CategoryImage,x.ClassifiedDescription,x.ClassifiedTitle }).ToList(), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                db.Configuration.ProxyCreationEnabled = false;
+                return Json(db.Classifieds.Where(e => e.CategoryID == id).Select(x => new { x.CategoryID, x.ClassfiedImage, x.Category.CategoryImage, x.ClassifiedDescription, x.ClassifiedTitle }).ToList(), JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        // GET: Api
         public JsonResult Categories(int? id)
         {
             if (id == null)
