@@ -47,6 +47,21 @@ namespace VariousClassifiedWeb.Controllers
         }
 
         // GET: Api
+        public JsonResult GetReferenceNo()
+        {
+            Reference cReference;
+            cReference = db.References.Find(1);
+            if(cReference!=null)
+            {
+                cReference.NextRefNo = "REF" + String.Format("{0:0000000000}", int.Parse(cReference.NextRefNo.Substring(3))+1);
+                db.SaveChanges();
+            }
+            db.Configuration.ProxyCreationEnabled = false;
+            return Json(db.References.Where(e => e.Id == 1).Select(x => new { x.NextRefNo }).ToList(), JsonRequestBehavior.AllowGet);
+
+        }
+
+        // GET: Api
         public JsonResult Categories(int? id)
         {
             if (id == null)
@@ -64,7 +79,7 @@ namespace VariousClassifiedWeb.Controllers
 
         // Post: Api
         [HttpPost]
-        public void Index(int? id,string ClassifiedTitle, string ClassifiedDescription,int CategoryID,string ClassifiedImage, bool IsActive)
+        public void Index(int? id,string ClassifiedTitle, string ClassifiedDescription,int CategoryID,string ClassifiedImage, bool IsActive, string ContactDetails, string Notes,string RefNo ="")
         {
             Classified cClassified;
             if (id!=null)
@@ -74,7 +89,9 @@ namespace VariousClassifiedWeb.Controllers
                 cClassified.ClassifiedDescription = ClassifiedDescription;
                 cClassified.CategoryID = CategoryID;
                 cClassified.ClassfiedImage = ClassifiedImage;
-                cClassified.IsActive = IsActive;                
+                cClassified.IsActive = IsActive;
+                cClassified.ContactDetails = ContactDetails;
+                cClassified.Notes = Notes;
                 db.SaveChanges();
 
             }
@@ -87,6 +104,9 @@ namespace VariousClassifiedWeb.Controllers
                 cClassified.CategoryID = CategoryID;
                 cClassified.ClassfiedImage = ClassifiedImage;
                 cClassified.IsActive = IsActive;
+                cClassified.RefNo = RefNo;
+                cClassified.ContactDetails = ContactDetails;
+                cClassified.Notes = Notes;
                 db.Classifieds.Add(cClassified);
                 db.SaveChanges();
             }

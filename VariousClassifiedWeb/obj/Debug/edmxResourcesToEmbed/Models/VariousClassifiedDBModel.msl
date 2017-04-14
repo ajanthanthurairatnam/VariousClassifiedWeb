@@ -1,9 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="VariousClassifiedDBModelStoreContainer" CdmEntityContainer="VariousClassifiedDBEntities">
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="VariousClassifiedDBModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CategoryImage" ColumnName="CategoryImage" />
+          <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+          <ScalarProperty Name="CategoryTitle" ColumnName="CategoryTitle" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Classifieds">
       <EntityTypeMapping TypeName="VariousClassifiedDBModel.Classified">
         <MappingFragment StoreEntitySet="Classified">
+          <ScalarProperty Name="RefNo" ColumnName="RefNo" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="ContactDetails" ColumnName="ContactDetails" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="ToDate" ColumnName="ToDate" />
           <ScalarProperty Name="FromDate" ColumnName="FromDate" />
@@ -15,14 +29,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Categories">
-      <EntityTypeMapping TypeName="VariousClassifiedDBModel.Category">
-        <MappingFragment StoreEntitySet="Category">
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="CategoryImage" ColumnName="CategoryImage" />
-          <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
-          <ScalarProperty Name="CategoryTitle" ColumnName="CategoryTitle" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
+    <EntitySetMapping Name="References">
+      <EntityTypeMapping TypeName="VariousClassifiedDBModel.Reference">
+        <MappingFragment StoreEntitySet="Reference">
+          <ScalarProperty Name="NextRefNo" ColumnName="NextRefNo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -27,6 +27,16 @@
           <Property Name="FromDate" Type="datetime" />
           <Property Name="ToDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" />
+          <Property Name="ContactDetails" Type="varchar(max)" />
+          <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="RefNo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Reference">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NextRefNo" Type="varchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Classified_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
@@ -43,6 +53,7 @@
         <EntityContainer Name="VariousClassifiedDBModelStoreContainer">
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Classified" EntityType="Self.Classified" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reference" EntityType="Self.Reference" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Classified_Category" Association="Self.FK_Classified_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Classified" EntitySet="Classified" />
@@ -53,13 +64,25 @@
     <edmx:ConceptualModels>
       <Schema Namespace="VariousClassifiedDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="VariousClassifiedDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Classifieds" EntityType="VariousClassifiedDBModel.Classified" />
           <EntitySet Name="Categories" EntityType="VariousClassifiedDBModel.Category" />
+          <EntitySet Name="Classifieds" EntityType="VariousClassifiedDBModel.Classified" />
+          <EntitySet Name="References" EntityType="VariousClassifiedDBModel.Reference" />
           <AssociationSet Name="FK_Classified_Category" Association="VariousClassifiedDBModel.FK_Classified_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Classified" EntitySet="Classifieds" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Classifieds" Relationship="VariousClassifiedDBModel.FK_Classified_Category" FromRole="Category" ToRole="Classified" />
+        </EntityType>
         <EntityType Name="Classified">
           <Key>
             <PropertyRef Name="ClassifiedID" />
@@ -72,18 +95,17 @@
           <Property Name="FromDate" Type="DateTime" Precision="3" />
           <Property Name="ToDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" />
+          <Property Name="ContactDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RefNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Category" Relationship="VariousClassifiedDBModel.FK_Classified_Category" FromRole="Classified" ToRole="Category" />
         </EntityType>
-        <EntityType Name="Category">
+        <EntityType Name="Reference">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CategoryDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CategoryImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IsActive" Type="Boolean" />
-          <NavigationProperty Name="Classifieds" Relationship="VariousClassifiedDBModel.FK_Classified_Category" FromRole="Category" ToRole="Classified" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NextRefNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Classified_Category">
           <End Type="VariousClassifiedDBModel.Category" Role="Category" Multiplicity="0..1" />
@@ -103,9 +125,23 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="VariousClassifiedDBModelStoreContainer" CdmEntityContainer="VariousClassifiedDBEntities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="VariousClassifiedDBModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CategoryImage" ColumnName="CategoryImage" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="CategoryTitle" ColumnName="CategoryTitle" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Classifieds">
             <EntityTypeMapping TypeName="VariousClassifiedDBModel.Classified">
               <MappingFragment StoreEntitySet="Classified">
+                <ScalarProperty Name="RefNo" ColumnName="RefNo" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="ContactDetails" ColumnName="ContactDetails" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ToDate" ColumnName="ToDate" />
                 <ScalarProperty Name="FromDate" ColumnName="FromDate" />
@@ -117,14 +153,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="VariousClassifiedDBModel.Category">
-              <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CategoryImage" ColumnName="CategoryImage" />
-                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
-                <ScalarProperty Name="CategoryTitle" ColumnName="CategoryTitle" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+          <EntitySetMapping Name="References">
+            <EntityTypeMapping TypeName="VariousClassifiedDBModel.Reference">
+              <MappingFragment StoreEntitySet="Reference">
+                <ScalarProperty Name="NextRefNo" ColumnName="NextRefNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

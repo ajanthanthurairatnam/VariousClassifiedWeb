@@ -22,6 +22,9 @@ namespace VariousClassifiedWeb.Models
         public Nullable<System.DateTime> FromDate { get; set; }
         public Nullable<System.DateTime> ToDate { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public string ContactDetails { get; set; }
+        public string Notes { get; set; }
+        public string RefNo { get; set; }
     
         public virtual Category Category { get; set; }
     }

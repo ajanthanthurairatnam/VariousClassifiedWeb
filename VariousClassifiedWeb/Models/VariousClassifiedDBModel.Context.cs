@@ -25,7 +25,8 @@ namespace VariousClassifiedWeb.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Classified> Classifieds { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Classified> Classifieds { get; set; }
+        public virtual DbSet<Reference> References { get; set; }
     }
 }
