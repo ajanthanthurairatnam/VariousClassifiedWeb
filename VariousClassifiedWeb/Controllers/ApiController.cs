@@ -36,14 +36,22 @@ namespace VariousClassifiedWeb.Controllers
             if (id == null)
             {
                 db.Configuration.ProxyCreationEnabled = false;
-                return Json(db.Classifieds.Select(x => new { x.ClassifiedID,x.CategoryID, x.ClassfiedImage, x.Category.CategoryTitle, x.Category.CategoryDescription, x.Category.CategoryImage,x.ClassifiedDescription,x.ClassifiedTitle }).ToList(), JsonRequestBehavior.AllowGet);
+                return Json(db.Classifieds.Select(x => new { x.ClassifiedID,x.CategoryID, x.ClassfiedImage, x.Category.CategoryTitle, x.Category.CategoryDescription, x.Category.CategoryImage,x.ClassifiedDescription,x.ClassifiedTitle, x.RefNo }).ToList(), JsonRequestBehavior.AllowGet);
             }
             else
             {
                 db.Configuration.ProxyCreationEnabled = false;
-                return Json(db.Classifieds.Where(e => e.CategoryID == id).Select(x => new { x.ClassifiedID, x.CategoryID, x.ClassfiedImage, x.Category.CategoryTitle, x.Category.CategoryDescription, x.Category.CategoryImage, x.ClassifiedDescription, x.ClassifiedTitle }).ToList(), JsonRequestBehavior.AllowGet);
+                return Json(db.Classifieds.Where(e => e.CategoryID == id).Select(x => new { x.ClassifiedID, x.CategoryID, x.ClassfiedImage, x.Category.CategoryTitle, x.Category.CategoryDescription, x.Category.CategoryImage, x.ClassifiedDescription, x.ClassifiedTitle, x.RefNo }).ToList(), JsonRequestBehavior.AllowGet);
             }
 
+        }
+
+        // GET: Api
+        public JsonResult AllClassifiedsGroupByCategoryID()
+        {        
+                db.Configuration.ProxyCreationEnabled = false;
+                return Json(db.Classifieds.Select(x => new { x.ClassifiedID, x.CategoryID,x.Category.CategoryTitle, x.Category.CategoryDescription, x.ClassifiedDescription, x.ClassifiedTitle, x.RefNo }).GroupBy(e=>e.CategoryID).SelectMany(g => g.Take(10)).ToList(), JsonRequestBehavior.AllowGet);
+       
         }
 
         // GET: Api
