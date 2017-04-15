@@ -20,12 +20,12 @@ namespace VariousClassifiedWeb.Controllers
             if (id == null)
             {
                 db.Configuration.ProxyCreationEnabled = false;
-                return Json(db.Classifieds.ToList(), JsonRequestBehavior.AllowGet);
+                return Json(db.Classifieds.OrderByDescending(e => e.ClassifiedID).ToList(), JsonRequestBehavior.AllowGet);
             }
             else
             {
                 db.Configuration.ProxyCreationEnabled = false;
-                return Json(db.Classifieds.Where(e=>e.ClassifiedID==id).ToList(), JsonRequestBehavior.AllowGet);
+                return Json(db.Classifieds.Where(e=>e.ClassifiedID==id).OrderByDescending(e => e.ClassifiedID).ToList(), JsonRequestBehavior.AllowGet);
             }
            
         }
@@ -36,12 +36,12 @@ namespace VariousClassifiedWeb.Controllers
             if (id == null)
             {
                 db.Configuration.ProxyCreationEnabled = false;
-                return Json(db.Classifieds.Select(x => new { x.ClassifiedID,x.CategoryID, x.ClassfiedImage, x.Category.CategoryTitle, x.Category.CategoryDescription, x.Category.CategoryImage,x.ClassifiedDescription,x.ClassifiedTitle, x.RefNo }).ToList(), JsonRequestBehavior.AllowGet);
+                return Json(db.Classifieds.Select(x => new { x.ClassifiedID,x.CategoryID, x.ClassfiedImage, x.Category.CategoryTitle, x.Category.CategoryDescription, x.Category.CategoryImage,x.ClassifiedDescription,x.ClassifiedTitle, x.RefNo }).OrderByDescending(e => e.ClassifiedID).ToList(), JsonRequestBehavior.AllowGet);
             }
             else
             {
                 db.Configuration.ProxyCreationEnabled = false;
-                return Json(db.Classifieds.Where(e => e.CategoryID == id).Select(x => new { x.ClassifiedID, x.CategoryID, x.ClassfiedImage, x.Category.CategoryTitle, x.Category.CategoryDescription, x.Category.CategoryImage, x.ClassifiedDescription, x.ClassifiedTitle, x.RefNo }).ToList(), JsonRequestBehavior.AllowGet);
+                return Json(db.Classifieds.Where(e => e.CategoryID == id).Select(x => new { x.ClassifiedID, x.CategoryID, x.ClassfiedImage, x.Category.CategoryTitle, x.Category.CategoryDescription, x.Category.CategoryImage, x.ClassifiedDescription, x.ClassifiedTitle, x.RefNo }).OrderByDescending(e => e.ClassifiedID).ToList(), JsonRequestBehavior.AllowGet);
             }
 
         }
@@ -49,8 +49,16 @@ namespace VariousClassifiedWeb.Controllers
         // GET: Api
         public JsonResult AllClassifiedsGroupByCategoryID()
         {        
-                db.Configuration.ProxyCreationEnabled = false;
-                return Json(db.Classifieds.Select(x => new { x.ClassifiedID, x.CategoryID,x.Category.CategoryTitle, x.Category.CategoryDescription, x.ClassifiedDescription, x.ClassifiedTitle, x.RefNo }).GroupBy(e=>e.CategoryID).SelectMany(g => g.Take(10)).ToList(), JsonRequestBehavior.AllowGet);
+            db.Configuration.ProxyCreationEnabled = false;
+            var categories = db.Categories.ToList();
+            var classifieds= db.Classifieds.Select(x => new { x.ClassifiedID, x.CategoryID, x.Category.CategoryTitle, x.Category.CategoryDescription, x.ClassifiedDescription, x.ClassifiedTitle, x.RefNo }).Take(0).ToList();
+            foreach (var a in categories)
+            {
+                classifieds = classifieds.Concat(db.Classifieds.Select(x => new { x.ClassifiedID, x.CategoryID, x.Category.CategoryTitle, x.Category.CategoryDescription, x.ClassifiedDescription, x.ClassifiedTitle, x.RefNo }).Where(e=>e.CategoryID==a.ID).OrderByDescending(e => e.ClassifiedID).GroupBy(e => e.CategoryID).SelectMany(g => g.Take(10)).OrderByDescending(e => e.ClassifiedID)).ToList();
+
+            }
+
+            return Json(classifieds, JsonRequestBehavior.AllowGet);
        
         }
 
