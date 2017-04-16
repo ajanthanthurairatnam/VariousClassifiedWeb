@@ -25,6 +25,7 @@
     <Property Name="ContactDetails" Type="varchar(max)" />
     <Property Name="Notes" Type="varchar(max)" />
     <Property Name="RefNo" Type="varchar" MaxLength="50" />
+    <Property Name="UserID" Type="int" />
   </EntityType>
   <EntityType Name="Reference">
     <Key>
@@ -32,6 +33,24 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NextRefNo" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar(max)" />
+    <Property Name="RoleID" Type="int" />
+    <Property Name="EMail" Type="varchar" MaxLength="100" />
+    <Property Name="IsActive" Type="bit" />
   </EntityType>
   <Association Name="FK_Classified_Category">
     <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
@@ -45,13 +64,47 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Classified_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Classified" Type="Self.Classified" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Classified">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="VariousClassifiedDBModelStoreContainer">
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Classified" EntityType="Self.Classified" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reference" EntityType="Self.Reference" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Classified_Category" Association="Self.FK_Classified_Category">
       <End Role="Category" EntitySet="Category" />
       <End Role="Classified" EntitySet="Classified" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Classified_User" Association="Self.FK_Classified_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Classified" EntitySet="Classified" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="User" EntitySet="User" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

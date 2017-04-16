@@ -131,6 +131,12 @@
     <Compile Include="Models\Reference.cs">
       <DependentUpon>VariousClassifiedDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Role.cs">
+      <DependentUpon>VariousClassifiedDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>VariousClassifiedDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\VariousClassifiedDBModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

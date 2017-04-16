@@ -9,6 +9,10 @@
         <EntityTypeShape EntityType="VariousClassifiedDBModel.Classified" Width="1.5" PointX="3" PointY="1" />
         <EntityTypeShape EntityType="VariousClassifiedDBModel.Reference" Width="1.5" PointX="5.75" PointY="0.75" />
         <AssociationConnector Association="VariousClassifiedDBModel.FK_Classified_Category" />
+        <EntityTypeShape EntityType="VariousClassifiedDBModel.Role" Width="1.5" PointX="0.75" PointY="9" />
+        <EntityTypeShape EntityType="VariousClassifiedDBModel.User" Width="1.5" PointX="0.75" PointY="5.625" />
+        <AssociationConnector Association="VariousClassifiedDBModel.FK_Classified_User" />
+        <AssociationConnector Association="VariousClassifiedDBModel.FK_User_Role" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

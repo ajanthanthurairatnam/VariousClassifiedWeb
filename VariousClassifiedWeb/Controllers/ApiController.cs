@@ -147,6 +147,51 @@ namespace VariousClassifiedWeb.Controllers
             return bytes;
         }
 
+        // GET: Api
+        public JsonResult users(int? id)
+        {
+            if (id == null)
+            {
+                db.Configuration.ProxyCreationEnabled = false;
+                return Json(db.Users.OrderByDescending(e=>e.ID).ToList(), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                db.Configuration.ProxyCreationEnabled = false;
+                return Json(db.Users.Where(e=>e.ID == id).OrderByDescending(e => e.ID ).ToList(), JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        // Post: Api
+        [HttpPost]       
+        public void SaveUser(int? id, string UserName, string Password,  string EMail, bool IsActive)
+        {
+            User cUser;
+            if (id != null)
+            {
+                cUser = db.Users.Find(id);
+                cUser.UserName = UserName;
+                cUser.Password = Password;
+                cUser.EMail = EMail;
+                cUser.IsActive = IsActive;               
+                db.SaveChanges();
+
+            }
+            else
+            {
+                cUser = new User();               
+                cUser.UserName = UserName;
+                cUser.Password = Password;
+                cUser.EMail = EMail;
+                cUser.RoleID = 1;
+                cUser.IsActive = IsActive;
+                db.Users.Add(cUser);
+                db.SaveChanges();
+            }
+
+        }
+
         // GET: Api/Details/5
         public ActionResult Details(int? id)
         {
