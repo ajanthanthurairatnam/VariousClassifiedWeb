@@ -192,6 +192,17 @@ namespace VariousClassifiedWeb.Controllers
 
         }
 
+
+        // POST: Api/Delete/5
+        [HttpPost]
+        public void DeleteUser(int id)
+        {
+            User user = db.Users.Find(id);
+            db.Users.Remove(user);
+            db.SaveChanges();
+
+        }
+
         // GET: Api/Details/5
         public ActionResult Details(int? id)
         {
