@@ -193,6 +193,40 @@ namespace VariousClassifiedWeb.Controllers
         }
 
 
+        // Post: Api
+        [HttpPost]
+        public JsonResult login(string UserName, string Password)
+        {
+            User cUser;
+            cUser = db.Users.Where(e => e.UserName == UserName && e.Password == Password).FirstOrDefault();
+            db.Configuration.ProxyCreationEnabled = false;
+            if (cUser != null)
+            {
+
+                return new JsonResult
+                {
+                    Data = new
+                    {
+                        status = "success",
+                        message = "Successfully logged in."
+                    }
+                };
+            }
+            else
+            {
+
+                return new JsonResult
+                {
+                    Data = new
+                    {
+                        status = "notfoung",
+                        message = "User not found."
+                    }
+                };
+            }
+
+        }
+
         // POST: Api/Delete/5
         [HttpPost]
         public void DeleteUser(int id)
