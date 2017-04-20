@@ -95,7 +95,7 @@ namespace VariousClassifiedWeb.Controllers
 
         // Post: Api
         [HttpPost]
-        public void Index(int? id,string ClassifiedTitle, string ClassifiedDescription,int CategoryID,string ClassifiedImage, bool IsActive, string ContactDetails, string Notes,string RefNo ="")
+        public void Index(int? id,string ClassifiedTitle, string ClassifiedDescription,int CategoryID,string ClassifiedImage, bool IsActive, string ContactDetails, string Notes, string FromDate, string ToDate,string RefNo ="")
         {
             Classified cClassified;
             if (id!=null)
@@ -108,7 +108,19 @@ namespace VariousClassifiedWeb.Controllers
                 cClassified.IsActive = IsActive;
                 cClassified.ContactDetails = ContactDetails;
                 cClassified.Notes = Notes;
-                db.SaveChanges();
+                cClassified.FromDate = null;
+                cClassified.ToDate = null;
+                DateTime value;
+                if (!string.IsNullOrEmpty(FromDate))                    
+                if (DateTime.TryParse(FromDate, out value))
+                {
+                        cClassified.FromDate = value;                       
+                }
+                if(DateTime.TryParse(ToDate, out value))
+                {
+                    cClassified.ToDate = value;
+                }
+                    db.SaveChanges();
 
             }
             else
@@ -123,6 +135,18 @@ namespace VariousClassifiedWeb.Controllers
                 cClassified.RefNo = RefNo;
                 cClassified.ContactDetails = ContactDetails;
                 cClassified.Notes = Notes;
+                cClassified.FromDate = null;
+                cClassified.ToDate = null;
+                DateTime value;
+                if (!string.IsNullOrEmpty(FromDate))
+                    if (DateTime.TryParse(FromDate, out value))
+                    {
+                        cClassified.FromDate = value;
+                    }
+                if (DateTime.TryParse(ToDate, out value))
+                {
+                    cClassified.ToDate = value;
+                }
                 db.Classifieds.Add(cClassified);
                 db.SaveChanges();
             }
