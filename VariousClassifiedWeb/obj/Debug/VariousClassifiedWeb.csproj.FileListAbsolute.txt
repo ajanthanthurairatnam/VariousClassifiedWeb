@@ -99,3 +99,4 @@ C:\Users\ajant\OneDrive\Documents\GitHub\VariousClassifiedWeb\VariousClassifiedW
 C:\Users\ajant\OneDrive\Documents\GitHub\VariousClassifiedWeb\VariousClassifiedWeb\bin\System.Web.Mvc.xml
 C:\Users\ajant\OneDrive\Documents\GitHub\VariousClassifiedWeb\VariousClassifiedWeb\obj\Debug\VariousClassifiedWeb.dll
 C:\Users\ajant\OneDrive\Documents\GitHub\VariousClassifiedWeb\VariousClassifiedWeb\obj\Debug\VariousClassifiedWeb.pdb
+C:\Users\ajant\OneDrive\Documents\GitHub\VariousClassifiedWeb\VariousClassifiedWeb\obj\Debug\VariousClassifiedWeb.csprojResolveAssemblyReference.cache

@@ -15,12 +15,12 @@ namespace VariousClassifiedWeb.Controllers
         private VariousClassifiedDBEntities db = new VariousClassifiedDBEntities();
 
         // GET: Api
-        public JsonResult Index(int? id, string ClassifiedTitle)
+        public JsonResult Index(int? id, string ClassifiedTitle, int page=1)
       {
             if (id == null)
             {
                 db.Configuration.ProxyCreationEnabled = false;
-                return Json(db.Classifieds.OrderByDescending(e => e.ClassifiedID).ToList(), JsonRequestBehavior.AllowGet);
+                return Json(db.Classifieds.OrderByDescending(e => e.ClassifiedID).Skip(10 * (page - 1)).Take(10).ToList(), JsonRequestBehavior.AllowGet);
             }
             else
             {
@@ -30,6 +30,23 @@ namespace VariousClassifiedWeb.Controllers
                 return Json(db.Classifieds.Where(e=>e.ClassifiedID==id).OrderByDescending(e => e.ClassifiedID).AsEnumerable().Select(d=>new {d.CategoryID,d.ClassfiedImage,d.ClassifiedDescription,d.ClassifiedID,d.ClassifiedTitle,d.ContactDetails, FromDate = d.FromDate != null ? d.FromDate.Value.ToShortDateString() : null, d.IsActive,d.Notes,d.RefNo, ToDate = d.ToDate != null ? d.ToDate.Value.ToShortDateString() : null, d.UserID }).ToList(), JsonRequestBehavior.AllowGet);
             }
            
+        }
+
+        // GET: Api
+        [HttpPost]
+        public JsonResult IndexPost(int page = 1)
+        {
+            
+                db.Configuration.ProxyCreationEnabled = false;
+                return Json(db.Classifieds.OrderByDescending(e => e.ClassifiedID).Skip(10 * (page - 1)).Take(10).ToList(), JsonRequestBehavior.AllowGet);
+           
+
+        }
+
+        public JsonResult pagecount()
+        {           
+                db.Configuration.ProxyCreationEnabled = false;
+                return Json((db.Classifieds.OrderByDescending(e => e.ClassifiedID).Count()+db.Classifieds.OrderByDescending(e => e.ClassifiedID).Count()%10)/10, JsonRequestBehavior.AllowGet);           
         }
 
         // GET: Api
