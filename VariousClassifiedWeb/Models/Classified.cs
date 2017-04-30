@@ -25,8 +25,8 @@ namespace VariousClassifiedWeb.Models
         public string ContactDetails { get; set; }
         public string Notes { get; set; }
         public string RefNo { get; set; }
-        public Nullable<int> UserID { get; set; }
-    
+        public Nullable<int> UserID { get; set; }       
+
         public virtual Category Category { get; set; }
         public virtual User User { get; set; }
     }

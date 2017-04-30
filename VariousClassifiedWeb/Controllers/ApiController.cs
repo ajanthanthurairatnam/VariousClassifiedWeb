@@ -25,7 +25,9 @@ namespace VariousClassifiedWeb.Controllers
             else
             {
                 db.Configuration.ProxyCreationEnabled = false;
-                return Json(db.Classifieds.Where(e=>e.ClassifiedID==id).OrderByDescending(e => e.ClassifiedID).ToList(), JsonRequestBehavior.AllowGet);
+                //return Json(db.Classifieds.Where(e => e.ClassifiedID == id).OrderByDescending(e => e.ClassifiedID).AsEnumerable().Select(e => new { e.Category, e.CategoryID, e.ClassfiedImage, e.ClassifiedDescription, e.ClassifiedID, e.ClassifiedTitle, e.ContactDetails, FromDate = e.FromDate != null ? e.FromDate.Value.ToShortDateString() : null, e.Notes, e.RefNo, ToDate = e.ToDate != null ? e.ToDate.Value.ToShortDateString() : null, e.User, e.UserID }).ToList(), JsonRequestBehavior.AllowGet);
+
+                return Json(db.Classifieds.Where(e=>e.ClassifiedID==id).OrderByDescending(e => e.ClassifiedID).AsEnumerable().Select(d=>new {d.CategoryID,d.ClassfiedImage,d.ClassifiedDescription,d.ClassifiedID,d.ClassifiedTitle,d.ContactDetails, FromDate = d.FromDate != null ? d.FromDate.Value.ToShortDateString() : null, d.IsActive,d.Notes,d.RefNo, ToDate = d.ToDate != null ? d.ToDate.Value.ToShortDateString() : null, d.UserID }).ToList(), JsonRequestBehavior.AllowGet);
             }
            
         }
