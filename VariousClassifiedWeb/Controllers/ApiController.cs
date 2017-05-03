@@ -15,7 +15,7 @@ namespace VariousClassifiedWeb.Controllers
         private VariousClassifiedDBEntities db = new VariousClassifiedDBEntities();
 
         // GET: Api
-        public JsonResult Index(int? id, string ClassifiedTitle, int page=1)
+        public JsonResult Index(int? id, string ClassifiedTitle, int page=1, string UserName = "")
       {
             if (id == null)
             {
@@ -30,16 +30,21 @@ namespace VariousClassifiedWeb.Controllers
                 return Json(db.Classifieds.Where(e=>e.ClassifiedID==id).OrderByDescending(e => e.ClassifiedID).AsEnumerable().Select(d=>new {d.CategoryID,d.ClassfiedImage,d.ClassifiedDescription,d.ClassifiedID,d.ClassifiedTitle,d.ContactDetails, FromDate = d.FromDate != null ? d.FromDate.Value.ToShortDateString() : null, d.IsActive,d.Notes,d.RefNo, ToDate = d.ToDate != null ? d.ToDate.Value.ToShortDateString() : null, d.UserID }).ToList(), JsonRequestBehavior.AllowGet);
             }
            
-        }
+        }   
 
-        // GET: Api
-        [HttpPost]
-        public JsonResult IndexPost(int page = 1)
-        {
-            
-                db.Configuration.ProxyCreationEnabled = false;
+        public JsonResult RetieveClassfied(int page = 1,string UserName = "")
+        {           
+             db.Configuration.ProxyCreationEnabled = false;
+            if (string.IsNullOrEmpty(UserName) || UserName == "ajanthan")
+            {
                 return Json(db.Classifieds.OrderByDescending(e => e.ClassifiedID).Skip(10 * (page - 1)).Take(10).ToList(), JsonRequestBehavior.AllowGet);
-           
+            }
+            else
+            {
+                return Json(db.Classifieds.Where(u => u.User.UserName == UserName).OrderByDescending(e => e.ClassifiedID).Skip(10 * (page - 1)).Take(10).ToList(), JsonRequestBehavior.AllowGet);
+
+            }
+
 
         }
 
@@ -47,6 +52,22 @@ namespace VariousClassifiedWeb.Controllers
         {           
                 db.Configuration.ProxyCreationEnabled = false;
                 return Json((db.Classifieds.OrderByDescending(e => e.ClassifiedID).Count()+db.Classifieds.OrderByDescending(e => e.ClassifiedID).Count()%10)/10, JsonRequestBehavior.AllowGet);           
+        }
+
+        [HttpPost]
+        public JsonResult pagecount(string UserName = "")
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            if ((string.IsNullOrEmpty(UserName) || UserName=="ajanthan"))
+            {
+                return Json((db.Classifieds.OrderByDescending(e => e.ClassifiedID).Count() + db.Classifieds.OrderByDescending(e => e.ClassifiedID).Count() % 10) / 10, JsonRequestBehavior.AllowGet);
+
+            }
+            else
+            {
+                return Json((db.Classifieds.Where(u => u.User.UserName == UserName).OrderByDescending(e => e.ClassifiedID).Count() + db.Classifieds.Where(u => u.User.UserName == UserName).OrderByDescending(e => e.ClassifiedID).Count() % 10) / 10, JsonRequestBehavior.AllowGet);
+
+            }
         }
 
         // GET: Api
@@ -114,8 +135,10 @@ namespace VariousClassifiedWeb.Controllers
 
         // Post: Api
         [HttpPost]
-        public void Index(int? id,string ClassifiedTitle, string ClassifiedDescription,int CategoryID,string ClassifiedImage, bool IsActive, string ContactDetails, string Notes, string FromDate, string ToDate,string RefNo ="")
+        public void Index(int? id,string ClassifiedTitle, string ClassifiedDescription,int CategoryID,string ClassifiedImage, bool IsActive, string ContactDetails, string Notes, string FromDate, string ToDate,string RefNo ="", string UserName="")
         {
+            User cUser = db.Users.Where(u => u.UserName == UserName).FirstOrDefault();
+
             Classified cClassified;
             if (id!=null)
             {
@@ -129,7 +152,9 @@ namespace VariousClassifiedWeb.Controllers
                 cClassified.Notes = Notes;
                 cClassified.FromDate = null;
                 cClassified.ToDate = null;
-                DateTime value;
+                if (cUser != null)
+                    cClassified.UserID = cUser.ID;
+                                    DateTime value;
                 if (!string.IsNullOrEmpty(FromDate))                    
                 if (DateTime.TryParse(FromDate, out value))
                 {
@@ -156,6 +181,8 @@ namespace VariousClassifiedWeb.Controllers
                 cClassified.Notes = Notes;
                 cClassified.FromDate = null;
                 cClassified.ToDate = null;
+                if (cUser != null)
+                    cClassified.UserID = cUser.ID;
                 DateTime value;
                 if (!string.IsNullOrEmpty(FromDate))
                     if (DateTime.TryParse(FromDate, out value))
@@ -196,12 +223,12 @@ namespace VariousClassifiedWeb.Controllers
             if (id == null)
             {
                 db.Configuration.ProxyCreationEnabled = false;
-                return Json(db.Users.OrderByDescending(e=>e.ID).ToList(), JsonRequestBehavior.AllowGet);
+                return Json(db.Users.OrderBy(e=>e.ID).ToList(), JsonRequestBehavior.AllowGet);
             }
             else
             {
                 db.Configuration.ProxyCreationEnabled = false;
-                return Json(db.Users.Where(e=>e.ID == id).OrderByDescending(e => e.ID ).ToList(), JsonRequestBehavior.AllowGet);
+                return Json(db.Users.Where(e=>e.ID == id).OrderBy(e => e.ID ).ToList(), JsonRequestBehavior.AllowGet);
             }
 
         }
