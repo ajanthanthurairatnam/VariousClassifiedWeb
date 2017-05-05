@@ -1,8 +1,8 @@
 <a href="#/addclassified">Add New Classified </a>
 <div class="row" ng-if="username=='ajanthan'">
     <div class="col-md-12" >
-    User name<select ng-model="UserName" ng-change="MyDestiny()">
-<option ng-repeat="x in users" ng-selected="x.UserName==UserName" value="{{x.UserName}}">{{x.UserName}}</option>
+    User name<select ng-model="UserName" ng-change="MyDestiny(UserName)">
+<option ng-repeat="x in users"  value="{{x.UserName}}">{{x.UserName}}</option>
 </select>
     </div>
 </div>

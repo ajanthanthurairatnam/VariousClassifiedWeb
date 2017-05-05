@@ -47,8 +47,9 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
         <li><a href="#/ClassifiedsByCategory/">Find all classifieds</a></li>
-      <li><a ng-if="username" href="#main"><span ng-if="username=='ajanthan'">Classified By User</span><span ng-if="username!='ajanthan'">My Classifieds</span></a></li>      
-    </ul>   
+      <li><a ng-if="username" href="#main"><span ng-if="username=='ajanthan'">Classified By User</span><span ng-if="username!='ajanthan'">My Classifieds</span></a></li> 
+        <li><a href="#/addclassified">Add New Classified </a></li>
+</ul>   
        <ul class="nav navbar-nav navbar-right">
            <li><a ng-if="username">Welcome {{username}} </a></li> 
             <li><a href="index.html#/login" ng-if="!username">Login</a></li>
