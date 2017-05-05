@@ -1,0 +1,82 @@
+<div class="row" ng-repeat="item in classified">
+    <div class="row"> 
+    <div class="col-md-3">Classified Title
+     </div>
+    <div class="col-md-9">
+       <input type="text" ng-model="item.ClassifiedTitle" />
+     </div>                   
+</div>
+<div class="row"> 
+    <div class="col-md-3">Classified Description
+     </div>
+     <div class="col-md-9">
+            <textarea ng-model="item.ClassifiedDescription" cols="40" rows="5"></textarea>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">Reference No
+</div>
+     <div class="col-md-9">
+      <input type="text" ng-model="item.RefNo" ng-readonly="true"/>
+    </div> 
+</div>
+<div class="row">
+    <div class="col-md-3">Category</div>
+    <div class="col-md-9">
+  <select ng-model="item.CategoryID"  >
+   <option data-ng-repeat="x in Categories" value="{{x.ID}}" ng-selected="item.CategoryID==x.ID">{{x.CategoryTitle}}</option>
+  </select>
+    </div>
+</div>
+    <div class="row"> 
+    <div class="col-md-3">Contact Details
+     </div>
+     <div class="col-md-9">
+           <textarea ng-model="item.ContactDetails" cols="40" rows="5"></textarea>
+    </div>
+</div>
+<div class="row"> 
+    <div class="col-md-3">Notes
+     </div>
+     <div class="col-md-9">
+           <textarea ng-model="item.Notes" cols="40" rows="5"></textarea>
+    </div>
+    </div>
+<div class="row">
+    <div class="col-md-3">Is Active</div>
+    <div class="col-md-9">
+        <input type="checkbox" ng-model="item.IsActive"  ng-model-options="{allowInvalid: true}"   /> 
+           <input type="text" class="datepic" ng-model="item.FromDate" datetime="MM/dd/yyyy">
+        <input type="text" class="datepic" ng-model="item.ToDate" datetime="MM/dd/yyyy">
+    </div> 
+     
+</div>
+<div class="row">
+    <div class="col-md-3">Classified Image</div>
+    <div class="col-md-9">
+
+<input type="file"  accept="image/*" id="imgInp" onchange="angular.element(this).scope().showMyImage(this)" />
+           <a href="#/viewclassfied/{{item.ClassifiedID}}">    
+<img id="img" ng-src="{{item.ClassfiedImage}}" alt="your image"  />
+         </a>
+ <input type="text" ng-model="item.ClassfiedImage" ng-hide="true"  />
+    </div>
+</div       
+
+<div class="row">
+    <div class="col-md-3"></div>
+     <div class="col-md-3">
+    <a class="btn btn-default" ng-click="addRule()">Save</a>
+       
+    </div>
+      <div class="col-md-6">
+            <a class="btn btn-default" ng-click="deleteRule()">Delete</a>
+    </div>
+</div>
+</div>
+      <script>
+  $(function() {
+    $(".datepic").datepicker();
+  });
+  </script>
