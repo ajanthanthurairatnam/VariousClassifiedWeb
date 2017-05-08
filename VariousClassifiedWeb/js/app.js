@@ -145,7 +145,7 @@ myApp.controller('logoutController', ['$scope', '$location', '$rootScope', '$htt
     $location.url(landingUrl);
 }]);
 
-myApp.controller('login', ['$scope', '$location', '$rootScope', '$http', function ($scope, $location, $rootScope, $http) {
+myApp.controller('login', ['$scope', '$location', '$rootScope', '$http', '$timeout', function ($scope, $location, $rootScope, $http, $timeout) {
     $scope.submessage = true;
     $scope.hasError = function (field, validation) {
         if (validation) {
@@ -177,12 +177,17 @@ myApp.controller('login', ['$scope', '$location', '$rootScope', '$http', functio
                 } else {
                     if (result.status == 'success') {
                         $rootScope.username = $scope.UserName;
-                        var landingUrl = '/';
-                        $location.url(landingUrl);
+                        $scope.submessage = false;
+                        $scope.message = result.message;
+                        $timeout(function () {
+                            var landingUrl = '/';
+                            $location.url(landingUrl);                           
+                        }, 1000);   
+                      
                     }
                     else {
                         $scope.submessage = false;
-                        $scope.message = result.message; 
+                        $scope.message = result.message + 'Please check the username and password.'; 
                     }
 
                 }
