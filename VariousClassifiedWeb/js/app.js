@@ -81,18 +81,18 @@ myApp.controller('mainController', ['$scope', '$location', '$routeParams', '$roo
         $location.url(landingUrl);
     }
     else {
-        $http.get('http://127.0.0.1/VariousClassifiedWeb/api/users')
+        $http.get('/VariousClassifiedWeb/api/users')
             .success(function (result) {
                 $scope.users = result;
                 $scope.UserName = $rootScope.username;
-                $http.post('http://127.0.0.1/VariousClassifiedWeb/api/pagecount', { UserName: $scope.UserName })
+                $http.post('/VariousClassifiedWeb/api/pagecount', { UserName: $scope.UserName })
                     .success(function (result) {
                         $scope.pagecount = [];
                         for (var i = 0; i < parseInt(result, 10); i++) {
                             $scope.pagecount[i] = i;
                         }
                     });
-                $http.post('http://127.0.0.1/VariousClassifiedWeb/api/RetieveClassfied', { UserName: $scope.UserName, page: $routeParams.page })
+                $http.post('/VariousClassifiedWeb/api/RetieveClassfied', { UserName: $scope.UserName, page: $routeParams.page })
                     .success(function (result) {
                         $scope.classifieds = result;
                         $scope.chunkedData = chunk(result, 4);
@@ -102,14 +102,14 @@ myApp.controller('mainController', ['$scope', '$location', '$routeParams', '$roo
     }
 
     $scope.MyDestiny = function (UserName) {        
-        $http.post('http://127.0.0.1/VariousClassifiedWeb/api/pagecount', { UserName: UserName })
+        $http.post('/VariousClassifiedWeb/api/pagecount', { UserName: UserName })
             .success(function (result) {
                 $scope.pagecount = [];
                 for (var i = 0; i < parseInt(result, 10); i++) {
                     $scope.pagecount[i] = i;
                 }
             });
-        $http.post('http://127.0.0.1/VariousClassifiedWeb/api/RetieveClassfied', { UserName: UserName, page: 1 })
+        $http.post('/VariousClassifiedWeb/api/RetieveClassfied', { UserName: UserName, page: 1 })
             .success(function (result) {
                 $scope.classifieds = result;
                 $scope.chunkedData = chunk(result, 4);
@@ -127,7 +127,7 @@ myApp.controller('userlistController', ['$scope', '$location', '$rootScope', '$h
         $location.url(landingUrl);
     }
     else {
-        $http.get('http://127.0.0.1/VariousClassifiedWeb/api/users')
+        $http.get('/VariousClassifiedWeb/api/users')
             .success(function (result) {
                 $scope.userlist = result;
             });
@@ -146,8 +146,32 @@ myApp.controller('logoutController', ['$scope', '$location', '$rootScope', '$htt
 }]);
 
 myApp.controller('login', ['$scope', '$location', '$rootScope', '$http', function ($scope, $location, $rootScope, $http) {
+    $scope.submessage = true;
+    $scope.hasError = function (field, validation) {
+        if (validation) {
+            return ($scope.loginForm[field].$dirty && $scope.loginForm[field].$error[validation]) || ($scope.submitted && $scope.loginForm[field].$error[validation]);
+        }
+        return ($scope.loginForm[field].$dirty && $scope.loginForm[field].$invalid) || ($scope.submitted && $scope.loginForm[field].$invalid);
+    };
+
+    $scope.blurUpdate = function () {
+        // add this line 
+        if (!$scope.submessage) {
+            $scope.submessage = true;
+            return;
+        }
+        //your code
+    }
+
+
     $scope.login = function () {
-        $http.post('http://127.0.0.1/VariousClassifiedWeb/api/login', { UserName: $scope.UserName, Password: $scope.Password })
+        if ($scope.loginForm.$invalid) {          
+            $scope.submitted = true;           
+            return;            
+        }
+
+   
+        $http.post('/VariousClassifiedWeb/api/login', { UserName: $scope.UserName, Password: $scope.Password })
             .success(function (result) {
                 if ($http.pendingRequests.length > 0) {
                 } else {
@@ -155,6 +179,10 @@ myApp.controller('login', ['$scope', '$location', '$rootScope', '$http', functio
                         $rootScope.username = $scope.UserName;
                         var landingUrl = '/';
                         $location.url(landingUrl);
+                    }
+                    else {
+                        $scope.submessage = false;
+                        $scope.message = result.message; 
                     }
 
                 }
@@ -168,7 +196,7 @@ myApp.controller('login', ['$scope', '$location', '$rootScope', '$http', functio
 
 myApp.controller('edituserController', ['$scope', '$location', '$routeParams', '$http', function ($scope, $location, $routeParams, $http) {
     if ($routeParams.num) {
-        $http.get('http://127.0.0.1/VariousClassifiedWeb/api/users', {
+        $http.get('/VariousClassifiedWeb/api/users', {
             params: { id: $routeParams.num }
         }).success(function (result) {
             $scope.user = result[0];
@@ -182,7 +210,7 @@ myApp.controller('edituserController', ['$scope', '$location', '$routeParams', '
             $scope.user.IsActive = false;
         }
         console.log($scope.user.IsActive);
-        $http.post('http://127.0.0.1/VariousClassifiedWeb/api/SaveUser', { id: $scope.user.ID, UserName: $scope.user.UserName, Password: $scope.user.Password, EMail: $scope.user.EMail, IsActive: $scope.user.IsActive })
+        $http.post('/VariousClassifiedWeb/api/SaveUser', { id: $scope.user.ID, UserName: $scope.user.UserName, Password: $scope.user.Password, EMail: $scope.user.EMail, IsActive: $scope.user.IsActive })
             .success(function (result) {
                 if ($http.pendingRequests.length > 0) {
                 } else {
@@ -193,7 +221,7 @@ myApp.controller('edituserController', ['$scope', '$location', '$routeParams', '
     };
 
     $scope.deleteUser = function () {
-        $http.post('http://127.0.0.1/VariousClassifiedWeb/Api/DeleteUser', { id: $scope.user.ID })
+        $http.post('/VariousClassifiedWeb/Api/DeleteUser', { id: $scope.user.ID })
             .success(function (result) {
                 if ($http.pendingRequests.length > 0) {
                 } else {
@@ -210,11 +238,11 @@ myApp.controller('edituserController', ['$scope', '$location', '$routeParams', '
 
 
 myApp.controller('allclassifiedsController', ['$scope', '$location', '$http', function ($scope, $location, $http) {
-    $http.get('http://127.0.0.1/VariousClassifiedWeb/api/Categories')
+    $http.get('/VariousClassifiedWeb/api/Categories')
         .success(function (result) {
             $scope.Categories = result;
         });
-    $http.get('http://127.0.0.1/VariousClassifiedWeb/api/AllClassifiedsGroupByCategoryID')
+    $http.get('/VariousClassifiedWeb/api/AllClassifiedsGroupByCategoryID')
         .success(function (result) {
             $scope.classifieds = result;
             $scope.chunkedData = chunk(result, 4);
@@ -229,7 +257,7 @@ myApp.controller('allclassifiedsController', ['$scope', '$location', '$http', fu
 
 
 myApp.controller('viewController', ['$scope', '$log', '$routeParams', '$http', function ($scope, $log, $routeParams, $http) {
-    $http.get('http://127.0.0.1/VariousClassifiedWeb/api', {
+    $http.get('/VariousClassifiedWeb/api', {
         params: { id: $routeParams.num }
     }).success(function (result) {
         $scope.classified = result;
@@ -237,7 +265,7 @@ myApp.controller('viewController', ['$scope', '$log', '$routeParams', '$http', f
 }]);
 
 myApp.controller('ClassifiedsByCategoryController', ['$scope', '$log', '$routeParams', '$http', function ($scope, $log, $routeParams, $http) {
-    $http.get('http://127.0.0.1/VariousClassifiedWeb/api/ClassifiedsByCategoryID', {
+    $http.get('/VariousClassifiedWeb/api/ClassifiedsByCategoryID', {
         params: { id: $routeParams.num }
     }).success(function (result) {
         if (angular.isUndefined($routeParams.num)) {
@@ -261,12 +289,12 @@ myApp.controller('editController', ['$scope', '$log', '$routeParams', '$rootScop
         });
     }
 
-    $http.get('http://127.0.0.1/VariousClassifiedWeb/api/Categories')
+    $http.get('/VariousClassifiedWeb/api/Categories')
         .success(function (result) {
             $scope.Categories = result;
 
         });
-    $http.get('http://127.0.0.1/VariousClassifiedWeb/api', {
+    $http.get('/VariousClassifiedWeb/api', {
         params: { id: $routeParams.num }
     }).success(function (result) {
         $scope.classified = result;
@@ -277,7 +305,7 @@ myApp.controller('editController', ['$scope', '$log', '$routeParams', '$rootScop
         if (angular.isUndefined($scope.IsActive)) {
             $scope.IsActive = false;
         }
-        $http.post('http://127.0.0.1/VariousClassifiedWeb/api', { id: $scope.classified[0].ClassifiedID, ClassifiedTitle: $scope.classified[0].ClassifiedTitle, ClassifiedDescription: $scope.classified[0].ClassifiedDescription, CategoryID: $scope.classified[0].CategoryID, ClassifiedImage: $scope.classified[0].ClassfiedImage, ContactDetails: $scope.classified[0].ContactDetails, Notes: $scope.classified[0].Notes, IsActive: $scope.classified[0].IsActive, FromDate: $scope.classified[0].FromDate, ToDate: $scope.classified[0].ToDate, UserName: $rootScope.username })
+        $http.post('/VariousClassifiedWeb/api', { id: $scope.classified[0].ClassifiedID, ClassifiedTitle: $scope.classified[0].ClassifiedTitle, ClassifiedDescription: $scope.classified[0].ClassifiedDescription, CategoryID: $scope.classified[0].CategoryID, ClassifiedImage: $scope.classified[0].ClassfiedImage, ContactDetails: $scope.classified[0].ContactDetails, Notes: $scope.classified[0].Notes, IsActive: $scope.classified[0].IsActive, FromDate: $scope.classified[0].FromDate, ToDate: $scope.classified[0].ToDate, UserName: $rootScope.username })
             .success(function (result) {
                 if ($http.pendingRequests.length > 0) {
                 } else {
@@ -290,7 +318,7 @@ myApp.controller('editController', ['$scope', '$log', '$routeParams', '$rootScop
     };
 
     $scope.deleteRule = function () {
-        $http.post('http://127.0.0.1/VariousClassifiedWeb/Api/Delete', { id: $scope.classified[0].ClassifiedID })
+        $http.post('/VariousClassifiedWeb/Api/Delete', { id: $scope.classified[0].ClassifiedID })
             .success(function (result) {
                 if ($http.pendingRequests.length > 0) {
                 } else {
@@ -333,11 +361,11 @@ myApp.controller('addController', ['$scope', '$rootScope', '$http', '$location',
         $location.url(landingUrl); 
     }
     else {
-        $http.get('http://127.0.0.1/VariousClassifiedWeb/api/Categories')
+        $http.get('/VariousClassifiedWeb/api/Categories')
             .success(function (result) {
                 $scope.Categories = result;
             });
-        $http.get('http://127.0.0.1/VariousClassifiedWeb/api/GetReferenceNo')
+        $http.get('/VariousClassifiedWeb/api/GetReferenceNo')
             .success(function (result) {
                 $scope.Reference = result;
             });
@@ -354,7 +382,7 @@ myApp.controller('addController', ['$scope', '$rootScope', '$http', '$location',
             if (angular.isUndefined($scope.IsActive)) {
                 $scope.IsActive = false;
             }
-            $http.post('http://127.0.0.1/VariousClassifiedWeb/api', { ClassifiedTitle: $scope.ClassifiedTitle, ClassifiedDescription: $scope.ClassifiedDescription, CategoryID: $scope.CategoryID, ClassifiedImage: $scope.ClassfiedImage, IsActive: $scope.IsActive, ContactDetails: $scope.ContactDetails, Notes: $scope.Notes, RefNo: $scope.Reference[0].NextRefNo, FromDate: $scope.FromDate, ToDate: $scope.ToDate, UserName: $rootScope.username })
+            $http.post('/VariousClassifiedWeb/api', { ClassifiedTitle: $scope.ClassifiedTitle, ClassifiedDescription: $scope.ClassifiedDescription, CategoryID: $scope.CategoryID, ClassifiedImage: $scope.ClassfiedImage, IsActive: $scope.IsActive, ContactDetails: $scope.ContactDetails, Notes: $scope.Notes, RefNo: $scope.Reference[0].NextRefNo, FromDate: $scope.FromDate, ToDate: $scope.ToDate, UserName: $rootScope.username })
                 .success(function (result) {
                     if ($http.pendingRequests.length > 0) {
                     } else {

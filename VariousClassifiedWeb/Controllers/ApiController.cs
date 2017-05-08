@@ -289,7 +289,7 @@ namespace VariousClassifiedWeb.Controllers
                 {
                     Data = new
                     {
-                        status = "notfoung",
+                        status = "invaliduser",
                         message = "User not found."
                     }
                 };
