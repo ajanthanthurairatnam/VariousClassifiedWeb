@@ -199,7 +199,15 @@ myApp.controller('login', ['$scope', '$location', '$rootScope', '$http', '$timeo
 
 
 
-myApp.controller('edituserController', ['$scope', '$location', '$routeParams', '$http', function ($scope, $location, $routeParams, $http) {
+myApp.controller('edituserController', ['$scope', '$location', '$routeParams', '$http', '$timeout', function ($scope, $location, $routeParams, $http,$timeout) {
+    $scope.submitted = false;
+        $scope.hasError = function (field, validation) {
+        if (validation) {
+            return ($scope.edituserForm[field].$dirty && $scope.edituserForm[field].$error[validation]) || ($scope.submitted && $scope.edituserForm[field].$error[validation]);
+        }
+        return ($scope.edituserForm[field].$dirty && $scope.edituserForm[field].$invalid) || ($scope.submitted && $scope.edituserForm[field].$invalid);
+    };
+    $scope.passwordmatch = true;
     if ($routeParams.num) {
         $http.get('/VariousClassifiedWeb/api/users', {
             params: { id: $routeParams.num }
@@ -210,17 +218,41 @@ myApp.controller('edituserController', ['$scope', '$location', '$routeParams', '
 
 
 
-    $scope.SaveUser = function () {
-        if (angular.isUndefined($scope.user.IsActive)) {
-            $scope.user.IsActive = false;
+    $scope.matchPassword = function () {
+        if ($scope.user.Password != $scope.user.ConfirmPassword) {
+            $scope.passwordmatch = false;
+            return false;
+        }           
+        else {
+            $scope.passwordmatch = true;
+            return true;
         }
-        console.log($scope.user.IsActive);
+           
+    }
+
+    $scope.SaveUser = function () {
+        if (angular.isUndefined($scope.user.IsActive) ) {
+            $scope.user.IsActive = true;
+        }
+
+        if (!$scope.matchPassword()) { 
+            $scope.submitted = true;
+            return;
+        }
+        if ($scope.edituserForm.$invalid) {
+            $scope.submitted = true;
+            return;
+        }
+      
         $http.post('/VariousClassifiedWeb/api/SaveUser', { id: $scope.user.ID, UserName: $scope.user.UserName, Password: $scope.user.Password, EMail: $scope.user.EMail, IsActive: $scope.user.IsActive })
             .success(function (result) {
                 if ($http.pendingRequests.length > 0) {
-                } else {
-                    var landingUrl = '/userlist';
-                    $location.url(landingUrl);
+                } else {                    
+                    $scope.message = "User information is saved.";
+                    $timeout(function () {
+                        var landingUrl = '/';
+                        $location.url(landingUrl);
+                    }, 1000); 
                 }
             })
     };

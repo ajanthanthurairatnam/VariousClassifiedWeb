@@ -1,36 +1,58 @@
- <div class="row"> 
-     <div class="col-md-3">User Name
-     </div>
-    <div class="col-md-9">
-         <input type="text" ng-model="user.UserName"  />
-        <input type="text" ng-model="user.ID" ng-hide="true"  />
-     </div>                   
-</div>
-<div class="row"> 
-    <div class="col-md-3">Password
-     </div>
-     <div class="col-md-9">
-          <input type="text" ng-model="user.Password" />         
+<form name="edituserForm" role="form" novalidate>
+    <div class="row">
+        <div class="col-md-3">
+            User Name
+        </div>
+        <div class="col-md-9">
+            <input type="text" ng-model="user.UserName" name="user.UserName" id="user.UserName" ng-required="true" />
+            <span class="help-block" ng-show="hasError('user.UserName', 'required')">Please enter the username</span>   
+            <input type="text" ng-model="user.ID" ng-hide="true" />
+        </div>
     </div>
-</div>
-<div class="row"> 
-    <div class="col-md-3">EMail
-     </div>
-     <div class="col-md-9">
-          <input type="text" ng-model="user.EMail" />    
-          
+    <div class="row">
+        <div class="col-md-3">
+            Password
+        </div>
+        <div class="col-md-9">
+            <input type="Password" ng-model="user.Password" name="user.Password" id="user.Password" ng-required="true" />
+            <span class="help-block" ng-show="hasError('user.Password', 'required')">Please enter passowrd.</span>   
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-3">Is Active</div>
-    <div class="col-md-9">
-         <input type="checkbox" ng-model="user.IsActive"   />
-    </div>   
-</div>
-<div class="row">
-    <div class="col-md-3"></div>
-     <div class="col-md-9">
-<a class="btn btn-default" ng-click="SaveUser()">Save</a>
-     <a class="btn btn-default" ng-click="deleteUser()">Delete</a>
+    <div class="row">
+        <div class="col-md-3">
+            Re-enter Password
+        </div>
+        <div class="col-md-9">
+            <input type="Password" ng-model="user.ConfirmPassword" ng-pattern="user.Password" name="user.ConfirmPassword" id="user.ConfirmPassword" ng-blur='matchPassword()' />
+            <span ng-show="!passwordmatch" class="help-block">Passwords did not match.</span>
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-md-3">
+            E-Mail
+        </div>
+        <div class="col-md-9">
+            <input type="text" ng-model="user.EMail" name="EMail" id="EMail"  ng-required="true" />
+            <span class="help-block" ng-show="hasError('EMail', 'required')">Please enter E-Mail address.</span>   
+        </div>
+    </div>
+    <div class="row" ng-if="username=='ajanthan'">
+        <div class="col-md-3">Is Active</div>
+        <div class="col-md-9">
+            <input type="checkbox" ng-model="user.IsActive" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-9">
+            <a class="btn btn-default" ng-click="SaveUser()">Save</a>
+            <a class="btn btn-default" ng-click="deleteUser()">Delete</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-9">
+            <span class="help-block">{{ message }}. </span>
+        </div>
+    </div>
+    </form>
