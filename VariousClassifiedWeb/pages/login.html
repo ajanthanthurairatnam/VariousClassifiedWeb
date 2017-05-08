@@ -5,7 +5,8 @@
         </div>
         <div class="col-md-9">
             <input type="text" ng-model="UserName" ng-click="blurUpdate()" name="UserName" id="UserName" ng-required="true" />
-            <span class="help-block" ng-show="hasError('UserName', 'required')">Please enter the username</span>              
+            <span class="help-block" ng-show="hasError('UserName', 'required')">Please enter the username</span>   
+            <span class="help-block" ng-show="hasError('UserName', 'required')">User name unavailable. Please select another.</span>         
         </div>
     </div>
     <div class="row">

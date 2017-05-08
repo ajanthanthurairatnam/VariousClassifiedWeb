@@ -265,6 +265,41 @@ namespace VariousClassifiedWeb.Controllers
 
         // Post: Api
         [HttpPost]
+        public JsonResult isUserExist(string UserName)
+        {
+            User cUser;
+            cUser = db.Users.Where(e => e.UserName == UserName).FirstOrDefault();
+            db.Configuration.ProxyCreationEnabled = false;
+            if (cUser != null)
+            {
+
+                return new JsonResult
+                {
+                    Data = new
+                    {
+                        status = "success",
+                        message = "User name Exist."
+                    }
+                };
+            }
+            else
+            {
+
+                return new JsonResult
+                {
+                    Data = new
+                    {
+                        status = "invaliduser",
+                        message = "User not found."
+                    }
+                };
+            }
+
+        }
+
+
+        // Post: Api
+        [HttpPost]
         public JsonResult login(string UserName, string Password)
         {
             User cUser;

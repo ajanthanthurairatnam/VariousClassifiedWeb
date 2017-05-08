@@ -199,7 +199,8 @@ myApp.controller('login', ['$scope', '$location', '$rootScope', '$http', '$timeo
 
 
 
-myApp.controller('edituserController', ['$scope', '$location', '$routeParams', '$http', '$timeout', function ($scope, $location, $routeParams, $http,$timeout) {
+myApp.controller('edituserController', ['$scope', '$location', '$routeParams', '$http', '$timeout', function ($scope, $location, $routeParams, $http, $timeout) {   
+    $scope.UserExistMessage = "";      
     $scope.submitted = false;
         $scope.hasError = function (field, validation) {
         if (validation) {
@@ -212,11 +213,24 @@ myApp.controller('edituserController', ['$scope', '$location', '$routeParams', '
         $http.get('/VariousClassifiedWeb/api/users', {
             params: { id: $routeParams.num }
         }).success(function (result) {
-            $scope.user = result[0];
+            $scope.user = result[0];            
         });
     }
 
-
+    $scope.isUserExist = function () {
+        $http.post('/VariousClassifiedWeb/api/isUserExist', { UserName: $scope.user.UserName })
+            .success(function (result) {
+                if ($http.pendingRequests.length > 0) {
+                } else {
+                    if (result.status == 'success') {
+                        $scope.UserExistMessage = "User name already exists. Please provide a new Username";
+                        return true;
+                    }                   
+                }
+            })
+        $scope.UserExistMessage = "";       
+        return false;
+    };
 
     $scope.matchPassword = function () {
         if ($scope.user.Password != $scope.user.ConfirmPassword) {
@@ -231,21 +245,35 @@ myApp.controller('edituserController', ['$scope', '$location', '$routeParams', '
     }
 
     $scope.SaveUser = function () {
-        if (angular.isUndefined($scope.user.IsActive) ) {
-            $scope.user.IsActive = true;
+        if ($scope.edituserForm.$invalid) {
+            $scope.submitted = true;
+            return;
         }
 
         if (!$scope.matchPassword()) { 
             $scope.submitted = true;
             return;
         }
+
+         if (angular.isUndefined($scope.user.IsActive)) {
+            $scope.user.IsActive = true;
+        }
+
         if ($scope.edituserForm.$invalid) {
             $scope.submitted = true;
             return;
         }
+
+        if (!$scope.user.ID) {
+            if ($scope.isUserExist()) {
+                $scope.submitted = true;                  
+                return;
+            }
+        }
       
         $http.post('/VariousClassifiedWeb/api/SaveUser', { id: $scope.user.ID, UserName: $scope.user.UserName, Password: $scope.user.Password, EMail: $scope.user.EMail, IsActive: $scope.user.IsActive })
             .success(function (result) {
+                alert('dd');
                 if ($http.pendingRequests.length > 0) {
                 } else {                    
                     $scope.message = "User information is saved.";
