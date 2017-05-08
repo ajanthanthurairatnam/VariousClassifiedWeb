@@ -265,15 +265,14 @@ myApp.controller('edituserController', ['$scope', '$location', '$routeParams', '
         }
 
         if (!$scope.user.ID) {
-            if ($scope.isUserExist()) {
+            if ($scope.UserExistMessage!='') {
                 $scope.submitted = true;                  
                 return;
             }
         }
       
         $http.post('/VariousClassifiedWeb/api/SaveUser', { id: $scope.user.ID, UserName: $scope.user.UserName, Password: $scope.user.Password, EMail: $scope.user.EMail, IsActive: $scope.user.IsActive })
-            .success(function (result) {
-                alert('dd');
+            .success(function (result) {                
                 if ($http.pendingRequests.length > 0) {
                 } else {                    
                     $scope.message = "User information is saved.";
