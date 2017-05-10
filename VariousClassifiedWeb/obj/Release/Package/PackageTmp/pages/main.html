@@ -1,0 +1,43 @@
+<a href="#/addclassified">Add New Classified </a>
+<div class="row" ng-if="username=='ajanthan'">
+    <div class="col-md-12" >
+    User name<select ng-model="UserName" ng-change="MyDestiny(UserName)">
+<option ng-repeat="x in users"  value="{{x.UserName}}">{{x.UserName}}</option>
+</select>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+       Search: <input ng-model="searchText" class="form-control" placeholder="Search">
+    </div>
+</div>
+<div class="row" ng-repeat="rows in chunkedData | filter:searchText:strict">
+  <div class="col-md-3 portfolio-item" ng-repeat="item in rows" ng-minlength="0">
+      <div class="row">
+          <div class="row"><div class="col-md-0 col-sd-4"></div><div class="col-md-12 col-sd-8"><h4>{{item.ClassifiedTitle}}</h4></div></div>
+          <div class="row">
+             <div class="col-md-3">
+        <a href="#/viewclassfied/{{item.ClassifiedID}}">    
+                    <img class="img-responsive " src="http://placehold.it/50x50" alt="">
+                </a>
+             <a href="#/editclass/{{item.ClassifiedID}}">    
+                    Edit Classified
+                </a>
+         </div>
+           
+           <div class="col-md-9">
+               {{item.ClassifiedDescription}}
+         </div></div>
+  
+      </div>
+     
+                
+            </div>
+         
+   
+</div>
+
+
+<ul class="pagination" ng-repeat="i in pagecount">  
+     <li><a href="#/main/{{i+1}}">{{i+1}}</a></li>    
+</ul>

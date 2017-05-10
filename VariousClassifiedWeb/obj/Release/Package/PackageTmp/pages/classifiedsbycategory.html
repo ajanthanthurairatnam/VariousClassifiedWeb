@@ -1,0 +1,57 @@
+<div class="row" >
+<div class="col-md-2 well">
+    <img id="img" ng-if="showall==0" class="img-thumbnail"  ng-src="{{classified[0].CategoryImage}}" alt="your image" width="120" height="120"/>
+    <img id="img" ng-if="showall==1" class="img-circle" src="./logos/logo.png" alt="your image" width="120" height="120" />   
+    </div>
+    <div class="col-md-10" >
+        <div class="row" >
+            <div class="col-md-12">
+               
+            <h1 ng-if="showall==0"><span > {{classified[0].CategoryTitle}}</span></h1>
+                <h1 ng-if="showall==1"><span> All Classifieds</span></h1>
+    
+               
+            </div>
+        </div>
+         <div class="row" >
+            <div class="col-md-12">
+                <span ng-if="showall==0" class="label label-default">{{classified[0].CategoryDescription}}</span>
+                <span ng-if="showall==1" class="label label-default">Find all classifieds.</span>
+                </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">       
+        <input ng-model="searchText" class="form-control" placeholder="Search">
+    </div>
+</div>
+<br />
+<div class="row" ng-repeat="classified in chunkedData ">
+     <div class="col-md-6 portfolio-item" ng-repeat="item in classified | filter:searchText:strict" ng-minlength="0">
+         <div class="row">
+                    <div class="col-md-2 well">                      
+                <a href="#/viewclassfied/{{item.ClassifiedID}}">    
+                <img id="img" ng-src="{{item.ClassfiedImage}}" alt="your image" class="img-responsive"/>
+                </a>
+              </div>  
+             <div class="col-md-9">     
+                <div class="row">
+                    <div class="col-md-12">    
+                        <span class="label label-default">Classified Title</span>{{item.ClassifiedTitle}}
+                    </div>
+                 </div>
+                 <div class="row">
+                    <div class="col-md-12">    
+                         <span class="label label-default">Classified Description</span> {{item.ClassifiedDescription}}  
+                        <br />
+                        <span>{{item.RefNo}}</span> 
+                         
+                    </div>
+                 </div>
+                </div>
+         </div>
+    </div>
+</div>
+
+

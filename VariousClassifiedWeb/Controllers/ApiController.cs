@@ -94,7 +94,7 @@ namespace VariousClassifiedWeb.Controllers
             var classifieds= db.Classifieds.Select(x => new { x.ClassifiedID, x.CategoryID, x.Category.CategoryTitle, x.Category.CategoryDescription, x.ClassifiedDescription, x.ClassifiedTitle, x.RefNo }).Take(0).ToList();
             foreach (var a in categories)
             {
-                classifieds = classifieds.Concat(db.Classifieds.Select(x => new { x.ClassifiedID, x.CategoryID, x.Category.CategoryTitle, x.Category.CategoryDescription, x.ClassifiedDescription, x.ClassifiedTitle, x.RefNo }).Where(e=>e.CategoryID==a.ID).OrderByDescending(e => e.ClassifiedID).GroupBy(e => e.CategoryID).SelectMany(g => g.Take(10)).OrderByDescending(e => e.ClassifiedID)).ToList();
+                classifieds = classifieds.Concat(db.Classifieds.Select(x => new { x.ClassifiedID, x.CategoryID, x.Category.CategoryTitle, x.Category.CategoryDescription, x.ClassifiedDescription, x.ClassifiedTitle, x.RefNo }).Where(e=>e.CategoryID==a.ID).OrderByDescending(e => e.ClassifiedID).GroupBy(e => e.CategoryID).SelectMany(g => g.Take(5)).OrderByDescending(e => e.ClassifiedID)).ToList();
 
             }
 
