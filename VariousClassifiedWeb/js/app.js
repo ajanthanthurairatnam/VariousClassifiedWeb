@@ -187,7 +187,7 @@ myApp.controller('login', ['$scope', '$location', '$rootScope', '$http', '$timeo
                     }
                     else {
                         $scope.submessage = false;
-                        $scope.message = result.message + 'Please check the username and password.'; 
+                        $scope.message = result.message + ' Please check the username and password.'; 
                     }
 
                 }
