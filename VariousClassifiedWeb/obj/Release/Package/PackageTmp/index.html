@@ -1,110 +1,206 @@
 ﻿<!DOCTYPE html>
 <html lang="en" ng-app="myApp">
-
+<!-- Mirrored from templatecycle.com/demo/bootclassified-v1.6/dist/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 09 May 2017 11:48:36 GMT -->
 <head>
-
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Various Classified</title>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="assets/ico/favicon.png">
+    <title>Various Classifieds - Online Repository of Classifieds.</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <link href="css/owl.theme.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/4-col-portfolio.css" rel="stylesheet">
-    
-     <!-- DatePicker CSS -->
+
+    <!-- DatePicker CSS -->
     <link href="css/jquery-ui.css" rel="stylesheet">
-    
-    <!-- Application CSS -->
-    <link href="css/app.css" rel="stylesheet">   
-   
-    
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
 
+    <script>
+        paceOptions = {
+            elements: true
+        };
+    </script>
+    <script src="assets/js/pace.min.js"></script>
+    <style>
+        .themeControll {
+            background: #2d3e50;
+            height: auto;
+            width: 170px;
+            position: fixed;
+            left: 0;
+            padding: 20px 0;
+            top: 100px;
+            z-index: 999999;
+            -webkit-transform: translateX(0);
+            -moz-transform: translateX(0);
+            -o-transform: translateX(0);
+            -ms-transform: translateX(0);
+            transform: translateX(0);
+            opacity: 1;
+            -ms-filter: none;
+            filter: none;
+            -webkit-transition: opacity .5s linear,-webkit-transform .7s cubic-bezier(.56,.48,0,.99);
+            -moz-transition: opacity .5s linear,-moz-transform .7s cubic-bezier(.56,.48,0,.99);
+            -o-transition: opacity .5s linear,-o-transform .7s cubic-bezier(.56,.48,0,.99);
+            -ms-transition: opacity .5s linear,-ms-transform .7s cubic-bezier(.56,.48,0,.99);
+            transition: opacity .5s linear,transform .7s cubic-bezier(.56,.48,0,.99);
+        }
+
+            .themeControll.active {
+                display: block;
+                -webkit-transform: translateX(-170px);
+                -moz-transform: translateX(-170px);
+                -o-transform: translateX(-170px);
+                -ms-transform: translateX(-170px);
+                transform: translateX(-170px);
+                -webkit-transition: opacity .5s linear,-webkit-transform .7s cubic-bezier(.56,.48,0,.99);
+                -moz-transition: opacity .5s linear,-moz-transform .7s cubic-bezier(.56,.48,0,.99);
+                -o-transition: opacity .5s linear,-o-transform .7s cubic-bezier(.56,.48,0,.99);
+                -ms-transition: opacity .5s linear,-ms-transform .7s cubic-bezier(.56,.48,0,.99);
+                transition: opacity .5s linear,transform .7s cubic-bezier(.56,.48,0,.99);
+            }
+
+            .themeControll a {
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                border-radius: 0;
+                clear: both;
+                color: #fff;
+                display: block;
+                height: auto;
+                line-height: 16px;
+                margin-bottom: 5px;
+                padding-bottom: 8px;
+                text-transform: capitalize;
+                width: auto;
+                font-family: Roboto Condensed,Helvetica Neue,Helvetica,sans-serif;
+            }
+
+        .tbtn {
+            background: #2D3E50;
+            color: #FFFFFF !important;
+            font-size: 30px;
+            height: auto;
+            padding: 10px;
+            position: absolute;
+            right: -40px;
+            top: 0;
+            width: 40px;
+            cursor: pointer;
+        }
+
+        .linkinner {
+            display: block;
+            height: 400px;
+        }
+
+        .linkScroll .scroller-bar {
+            width: 17px;
+        }
+
+        .linkScroll .scroller-bar, .linkScroll .scroller-track {
+            background: #1d2e40 !important;
+            border-color: #1d2e40 !important;
+        }
+
+        @media (max-width: 780px) {
+            .themeControll {
+                display: none;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header" >
-      <a class="navbar-brand" href="#">
-          
-         <img id="img"  ng-src="logos/logo.png" alt="your image" width="35" height="35"/>
-        </a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-        <li><a href="#/ClassifiedsByCategory/">Find all classifieds</a></li>
-      <li><a ng-if="username" href="#main"><span ng-if="username=='ajanthan'">Classified By User</span><span ng-if="username!='ajanthan'">My Classifieds</span></a></li> 
-        <li><a href="#/addclassified">Add New Classified </a></li>
-</ul>   
-       <ul class="nav navbar-nav navbar-right">
-           <li><a ng-if="username">Welcome {{username}} </a></li> 
-            <li><a href="index.html#/login" ng-if="!username">Login</a></li>
-            <li><a href="index.html#/adduser" ng-if="username">Create account</a></li>
-            <li><a href="index.html#/userlist" ng-if="username">User list</a></li>             
-        <li  ng-if="username"> <a href="index.html#/logout" >Logout</a></li>
-      
-    </ul>
-      
-  </div>
-</nav>
+    <div id="wrapper">
+        <div class="header">
+            <nav class="navbar   navbar-site navbar-default" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+                            <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                        </button>
+                        <a href="index.html" class="navbar-brand logo logo-title">
 
-    <!-- Page Content -->
-    <div class="container">
+                            <span class="logo-icon"><i class="icon icon-search-1 ln-shadow-logo shape-0"></i> </span>
+                            VARIOUS<span> CLASSIFIEDs </span>
+                        </a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a ng-if="username">Welcome {{username}} </a></li>
+                            <li><a href="index.html#/login" ng-if="!username">Login</a></li>
+                            <li ng-if="username"> <a href="index.html#/logout">Logout</a></li>
+                            <li><a ng-if="username" href="#main"><span ng-if="username=='ajanthan'">Classified By User</span><span ng-if="username!='ajanthan'">My Classifieds</span></a></li> 
+                            <li ng-if="username=='ajanthan'"><a href="index.html#/userlist" ng-if="username">User list</a></li>           
+                            <li><a href="index.html#/adduser">Sign Up</a></li>
+                            <li class="postadd"><a class="btn btn-block   btn-border btn-post btn-danger" href="#/addclassified">Post Free Add</a></li>
+                        </ul>
+                    </div>
 
-        <!-- Page Heading -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Various Classifieds
-                    <small>Publish small advertisements yourself</small>
-                </h1>
+                </div>
+
+            </nav>
+        </div>
+        <div ng-view></div>
+        <div class="footer" id="footer">
+            <div class="container">
+                <ul class=" pull-left navbar-link footer-nav">
+                    <li>
+                        <a href="index.html"> Home </a> <a href="about-us.html"> About us </a> <a href="terms-conditions.html">
+                            Terms and
+                            Conditions
+                        </a> <a href="#"> Privacy Policy </a> <a href="contact.html"> Contact us </a> <a href="faq.html"> FAQ </a>
+                </ul>
+                <ul class=" pull-right navbar-link footer-nav">
+                    <li>ajanthan &copy; 2017 Various Classifieds</li>
+                </ul>
             </div>
         </div>
-     <div ng-view></div>
-        
-       
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; ajanthan 2017</p>
-                </div>
-            </div>
-            <!-- /.row -->
-        </footer>
 
     </div>
-    <!-- /.container -->
 
-    <!-- jQuery -->
+
+
     <script src="js/jquery-3.2.0.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>    
-    
-    
-    
-              
-     
-      <script src="js/angular.min.js"></script> 
-     <script src="js/angular-route.min.js"></script>    
+
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="assets/js/owl.carousel.min.js"></script>
+
+    <script src="assets/js/jquery.matchHeight-min.js"></script>
+
+    <script src="assets/js/hideMaxListItem.js"></script>
+
+    <script src="assets/plugins/jquery.fs.scroller/jquery.fs.scroller.js"></script>
+    <script src="assets/plugins/jquery.fs.selecter/jquery.fs.selecter.js"></script>
+
+    <script src="assets/js/script.js"></script>
+
+    <script type="text/javascript" src="assets/plugins/autocomplete/jquery.mockjax.js"></script>
+    <script type="text/javascript" src="assets/plugins/autocomplete/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="assets/plugins/autocomplete/usastates.js"></script>
+    <script type="text/javascript" src="assets/plugins/autocomplete/autocomplete-demo.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
     <!-- app.js JavaScript -->
     <script src="js/app.js"></script>
-        <script src="js/jquery-ui.js"></script>
-
 </body>
-
+<!-- Mirrored from templatecycle.com/demo/bootclassified-v1.6/dist/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 09 May 2017 11:49:22 GMT -->
 </html>

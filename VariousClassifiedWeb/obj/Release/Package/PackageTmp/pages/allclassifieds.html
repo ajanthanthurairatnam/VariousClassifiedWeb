@@ -1,58 +1,76 @@
- <div class="row">
-    <div class="col-md-4"  ng-repeat="category in Categories | filter:filterMiscellaneousPropertyJobs">        
-        <div class="categoryProperty">       
-            <div class="row">
-               
-             <div class="col-md-12 col-md-offset-1 margintop lead">                
-                  <img id="img" class="img-circle"  ng-src="{{category.CategoryImage}}" alt="your image" width="30" height="30"/>
-        
-            {{category.CategoryTitle}} 
-               
-        </div>
-            </div>
-           
-        <div  class="row" ng-repeat="item in classifieds | filter:{ CategoryTitle: category.CategoryTitle }" >  
-            
-      <div class="col-md-12 marginleft">
-        {{item.ClassifiedTitle}}
-         
-               {{item.ClassifiedDescription.length >= 30 ? (item.ClassifiedDescription.substr(0,30)+'......') : item.ClassifiedDescription}}
-         </div>
-            </div>
-            </div>
- <a class="marginleft" href="#/ClassifiedsByCategory/{{category.ID}}">    
-                   Find more classified for  {{category.CategoryTitle}} ...
-                </a>
-    </div>
-</div>
-<br />
-<br />
- <div class="row">
-    <div class="col-md-4" ng-repeat="category in Categories | filter:filterBeautyServicesOther">         
-         <div class="categoryProperty">
-            <div class="row">
-            <div class="col-md-12 col-md-offset-1 margintop lead"> 
-                 <img id="img"  class="img-circle" ng-src="{{category.CategoryImage}}" alt="your image" width="30" height="30"/>
-        
-            {{category.CategoryTitle}} 
-             
-        </div>
-            </div>
-         <div  class="row" ng-repeat="item in classifieds | filter:{ CategoryTitle: category.CategoryTitle }" >   
-      <div class="col-md-12 marginleft">
-        {{item.CategoryTitle}}
-                       
-               
-               {{item.ClassifiedDescription.length >= 30 ? (item.ClassifiedDescription.substr(0,30)+'......') : item.ClassifiedDescription}}
-         </div>
+<div class="intro" style="background-image: url(images/bg3.jpg);">
+    <div class="dtable hw100">
+        <div class="dtable-cell hw100">
+            <div class="container text-center">
+                <h1 class="intro-title animated fadeInDown"> Find Classified Ads </h1>
+                <p class="sub animateme fittext3 animated fadeIn">
+                    Find local classified ads on Various Classifieds in
+                    Minutes
+                </p>                
             </div>
         </div>
- <a class="marginleft" href="#/ClassifiedsByCategory/{{category.ID}}">    
-                 Find more classified for  {{category.CategoryTitle}} ...
-                </a>
     </div>
 </div>
 
+<div class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 page-content col-thin-right">
+                <div class="inner-box category-content">
+                    <h2 class="title-2"><a href="#/ClassifiedsByCategory/">Find Classified Ads World Wide </a></h2>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4" ng-repeat="category in Categories | filter:filterMiscellaneousPropertyJobs">
+                            <div class="cat-list">
+                                <h3 class="cat-title">
+                                    <a href="#/ClassifiedsByCategory/{{category.ID}}">
+                                        <img id="img" class="img-circle" ng-src="{{category.CategoryImage}}" alt="your image" width="30" height="30" />
+                                        {{category.CategoryTitle}}
+                                    </a>
+                                    <span data-target=".cat-id-1" data-toggle="collapse" class="btn-cat-collapsed collapsed"> <span class=" icon-down-open-big"></span> </span>
+                                </h3>
 
-         
-   
+                                <ul class="cat-collapse collapse in cat-id-1" ng-repeat="item in classifieds | filter:{ CategoryTitle: category.CategoryTitle }">
+                                    <li><a href="#/viewclassfied/{{item.ClassifiedID}}">{{item.ClassifiedTitle}} &nbsp; {{item.ClassifiedDescription.length >= 30 ? (item.ClassifiedDescription.substr(0,30)+'......') : item.ClassifiedDescription}}</a></li>
+
+                                </ul>
+                                <a class="marginleft" href="#/ClassifiedsByCategory/{{category.ID}}">
+                                    Find more classified for  {{category.CategoryTitle}} ...
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4" ng-repeat="category in Categories | filter:filterBeautyServicesOther">
+                            <div class="cat-list">
+                                <h3 class="cat-title">
+                                    <a href="#/ClassifiedsByCategory/{{category.ID}}">
+                                        <img id="img" class="img-circle" ng-src="{{category.CategoryImage}}" alt="your image" width="30" height="30" />
+                                        {{category.CategoryTitle}}
+                                    </a>
+                                    <span data-target=".cat-id-1" data-toggle="collapse" class="btn-cat-collapsed collapsed"> <span class=" icon-down-open-big"></span> </span>
+                                </h3>
+
+                                <ul class="cat-collapse collapse in cat-id-1" ng-repeat="item in classifieds | filter:{ CategoryTitle: category.CategoryTitle }">
+                                    <li><a href="#/viewclassfied/{{item.ClassifiedID}}">{{item.ClassifiedTitle}} &nbsp; {{item.ClassifiedDescription.length >= 30 ? (item.ClassifiedDescription.substr(0,30)+'......') : item.ClassifiedDescription}}</a></li>
+
+                                </ul>
+                                <a class="marginleft" href="#/ClassifiedsByCategory/{{category.ID}}">
+                                    Find more classified for  {{category.CategoryTitle}} ...
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -187,7 +187,7 @@ myApp.controller('login', ['$scope', '$location', '$rootScope', '$http', '$timeo
                     }
                     else {
                         $scope.submessage = false;
-                        $scope.message = result.message + 'Please check the username and password.'; 
+                        $scope.message = result.message + ' Please check the username and password.'; 
                     }
 
                 }
@@ -285,16 +285,18 @@ myApp.controller('edituserController', ['$scope', '$location', '$routeParams', '
     };
 
     $scope.deleteUser = function () {
-        $http.post('/VariousClassifiedWeb/Api/DeleteUser', { id: $scope.user.ID })
-            .success(function (result) {
-                if ($http.pendingRequests.length > 0) {
-                } else {
-                    var landingUrl = '/userlist';
-                    $location.url(landingUrl);
-                }
+        if (confirm("Are you sure you want to delete this user")) {
+            $http.post('/VariousClassifiedWeb/Api/DeleteUser', { id: $scope.user.ID })
+                .success(function (result) {
+                    if ($http.pendingRequests.length > 0) {
+                    } else {
+                        var landingUrl = '/userlist';
+                        $location.url(landingUrl);
+                    }
 
 
-            })
+                })
+        }
     };
 
 

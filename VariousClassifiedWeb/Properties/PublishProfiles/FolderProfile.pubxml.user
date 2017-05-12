@@ -10,6 +10,219 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <_PublishTargetUrl>C:\Users\ajant\OneDrive\Documents\GitHub\VariousClassifiedWeb\AWS_Publish</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="ajax/1.html">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="ajax/2.html">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="ajax/3.html">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="ajax/ads-details.html">
+      <publishTime>05/09/2017 17:24:06</publishTime>
+    </File>
+    <File Include="ajax/images/item/FreeGreatPicture.com-46404-google-drops-nexus-4-by-100-offers-15-day-price-protection-refund.html">
+      <publishTime>05/09/2017 17:24:06</publishTime>
+    </File>
+    <File Include="ajax/images/item/FreeGreatPicture.com-46405-google-drops-price-of-nexus-4-smartphone.html">
+      <publishTime>05/09/2017 17:24:06</publishTime>
+    </File>
+    <File Include="ajax/images/item/tp/Image00003.html">
+      <publishTime>05/09/2017 17:24:06</publishTime>
+    </File>
+    <File Include="ajax/images/item/tp/Image00008.html">
+      <publishTime>05/09/2017 17:24:06</publishTime>
+    </File>
+    <File Include="ajax/images/item/tp/Image00014.html">
+      <publishTime>05/09/2017 17:24:06</publishTime>
+    </File>
+    <File Include="ajax/images/item/tp/Image00015.html">
+      <publishTime>05/09/2017 17:24:06</publishTime>
+    </File>
+    <File Include="ajax/images/item/tp/Image00022.html">
+      <publishTime>05/09/2017 17:24:06</publishTime>
+    </File>
+    <File Include="assets/bootstrap/css/bootstrap.css">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/bootstrap/css/bootstrap.min.css">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/bootstrap/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/bootstrap/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/bootstrap/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/bootstrap/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/bootstrap/fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/bootstrap/fonts/glyphicons-halflings-regulard41d.eot">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/bootstrap/js/bootstrap.min.js">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/css/AjaxLoader.gif">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/css/animate.min.css">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/css/coming-soon.css">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/css/fileinput.min.css">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/css/font-awesome.css">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/css/fontello.css">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/css/grabbing.png">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/css/longshadow.css">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/css/owl.carousel.css">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/css/owl.theme.css">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/css/style.css">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/fonts/fontawesome-webfont3295.eot">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/fonts/fontawesome-webfont3295.svg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/fonts/fontawesome-webfont3295.ttf">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/fonts/fontawesome-webfont3295.woff">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/fonts/fontawesome-webfont3295.woff2">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/fonts/fontawesome-webfontd41d.eot">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/fonts/fontello/fontello03a0.eot">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/fonts/fontello/fontello03a0.svg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/fonts/fontello/fontello03a0.ttf">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/fonts/fontello/fontello03a0.woff">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/ico/apple-touch-icon-114-precomposed.png">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/ico/apple-touch-icon-144-precomposed.png">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/ico/apple-touch-icon-57-precomposed.png">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/ico/apple-touch-icon-72-precomposed.png">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/ico/favicon.png">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/img/loading.gif">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/js/fileinput.min.js">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/js/footable.filtercd98.js">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/js/footablecd98.js">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/js/form-validation.js">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/js/hideMaxListItem.js">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/js/icheck.min.html">
+      <publishTime>05/09/2017 17:23:40</publishTime>
+    </File>
+    <File Include="assets/js/jquery.matchHeight-min.js">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/js/jquery/jquery-latest.js">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/js/owl.carousel.min.js">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/js/pace.min.js">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/js/script.js">
+      <publishTime>11/01/2016 15:33:33</publishTime>
+    </File>
+    <File Include="assets/plugins/autocomplete/autocomplete-demo.js">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/plugins/autocomplete/jquery.autocomplete.js">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/plugins/autocomplete/jquery.mockjax.js">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/plugins/autocomplete/usastates.js">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/plugins/bxslider/images/bx_loader.gif">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/plugins/bxslider/images/controls.png">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/plugins/bxslider/jquery.bxslider.css">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/plugins/bxslider/jquery.bxslider.min.js">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/plugins/jquery.countdown-2.1.0/jquery.countdown.js">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/plugins/jquery.fs.scroller/jquery.fs.scroller.css">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/plugins/jquery.fs.scroller/jquery.fs.scroller.js">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/plugins/jquery.fs.selecter/jquery.fs.selecter.css">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="assets/plugins/jquery.fs.selecter/jquery.fs.selecter.js">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>01/04/2017 00:44:16</publishTime>
     </File>
@@ -119,7 +332,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 17:34:30</publishTime>
     </File>
     <File Include="bin/VariousClassifiedWeb.dll">
-      <publishTime>05/09/2017 13:23:13</publishTime>
+      <publishTime>05/10/2017 12:20:35</publishTime>
     </File>
     <File Include="css/4-col-portfolio.css">
       <publishTime>04/15/2017 10:29:44</publishTime>
@@ -175,8 +388,326 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Global.asax">
       <publishTime>03/10/2017 19:02:40</publishTime>
     </File>
+    <File Include="images/add2.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/aff2.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/auto/2.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/auto/2012-mercedes-benz-sls-amg.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/auto/3.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/auto/dealer-logo.png">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/bg.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/bg2.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/bg3.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/blog/1.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/blog/10.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/blog/2.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/blog/3.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/blog/4.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/blog/5.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/blog/7.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/blog/9.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/category/camera.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/category/car-2.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/category/catalog.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/category/fashion.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/category/hdd.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/category/Home-Electronics-Appliances-2.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/category/house.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/category/jobs.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/category/laptop-2.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/category/mobile.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/category/toy.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/category/tv.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/house/11.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/house/13.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/house/14.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/house/2.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/house/4.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/house/b12.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/house/thumb/11.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/house/thumb/13.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/house/thumb/14.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/house/thumb/16.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/house/thumb/18.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/house/thumb/2.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/house/thumb/4.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/house/thumb/5.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/house/thumb/6.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/house/thumb/9.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/house/thumb/b12.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/house/thumb/building.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/info.png">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/3.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/4.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/6.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/FreeGreatPicture.com-46403-google-drops-nexus-4-price-now-starts-at-199-on-play-store.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/FreeGreatPicture.com-46404-google-drops-nexus-4-by-100-offers-15-day-price-protection-refund.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/FreeGreatPicture.com-46405-google-drops-price-of-nexus-4-smartphone.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/FreeGreatPicture.com-46407-nexus-4-starts-at-199.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/tp-big/Image00013.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/tp-big/Image00014.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/tp-big/Image00015.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/tp/Image00002.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/tp/Image00003.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/tp/Image00006.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/tp/Image00008.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/tp/Image00011.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/tp/Image00013.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/tp/Image00014.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/tp/Image00015.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/tp/Image00020.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/item/tp/Image00022.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/jobs/1.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/jobs/2.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/jobs/company-logos/1.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/jobs/company-logos/10.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/jobs/company-logos/11.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/jobs/company-logos/12.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/jobs/company-logos/13.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/jobs/company-logos/14.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/jobs/company-logos/15.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/jobs/company-logos/16.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/jobs/company-logos/17.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/jobs/company-logos/18.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/jobs/company-logos/19.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/jobs/company-logos/2.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/jobs/company-logos/20.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/jobs/company-logos/23.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/jobs/company-logos/4.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/jobs/company-logos/5.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/jobs/ibg.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/property-agency-logo.png">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/site/app.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/user.jpg">
+      <publishTime>11/01/2016 15:32:48</publishTime>
+    </File>
+    <File Include="images/users/1.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/users/10.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/users/11.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/users/12.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/users/13.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/users/14.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/users/15.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/users/16.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/users/2.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/users/3.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/users/4.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/users/5.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/users/6.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/users/7.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/users/8.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
+    <File Include="images/users/9.jpg">
+      <publishTime>11/01/2016 15:32:47</publishTime>
+    </File>
     <File Include="index.html">
-      <publishTime>05/05/2017 10:01:02</publishTime>
+      <publishTime>05/10/2017 11:03:01</publishTime>
     </File>
     <File Include="js/angular-route.min.js">
       <publishTime>03/11/2017 14:32:47</publishTime>
@@ -185,7 +716,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2017 14:32:22</publishTime>
     </File>
     <File Include="js/app.js">
-      <publishTime>05/08/2017 20:37:57</publishTime>
+      <publishTime>05/10/2017 12:13:46</publishTime>
     </File>
     <File Include="js/bootstrap.js">
       <publishTime>07/25/2016 15:53:28</publishTime>
@@ -212,22 +743,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/07/2017 22:35:02</publishTime>
     </File>
     <File Include="pages/addclassified.html">
-      <publishTime>04/20/2017 22:00:49</publishTime>
+      <publishTime>05/10/2017 11:45:02</publishTime>
     </File>
     <File Include="pages/allclassifieds.html">
-      <publishTime>05/05/2017 08:39:52</publishTime>
+      <publishTime>05/10/2017 12:32:27</publishTime>
     </File>
     <File Include="pages/classifiedsbycategory.html">
-      <publishTime>05/05/2017 09:22:44</publishTime>
+      <publishTime>05/10/2017 08:54:58</publishTime>
     </File>
     <File Include="pages/editclassified.html">
-      <publishTime>04/20/2017 22:38:47</publishTime>
+      <publishTime>05/10/2017 12:00:40</publishTime>
     </File>
     <File Include="pages/edituser.html">
-      <publishTime>05/08/2017 18:40:46</publishTime>
+      <publishTime>05/10/2017 10:50:40</publishTime>
     </File>
     <File Include="pages/login.html">
-      <publishTime>05/08/2017 17:08:17</publishTime>
+      <publishTime>05/10/2017 12:12:57</publishTime>
     </File>
     <File Include="pages/main.html">
       <publishTime>05/05/2017 10:38:27</publishTime>

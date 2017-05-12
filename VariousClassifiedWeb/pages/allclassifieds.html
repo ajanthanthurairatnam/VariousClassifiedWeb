@@ -22,7 +22,7 @@
                         <div class="col-md-4 col-sm-4" ng-repeat="category in Categories | filter:filterMiscellaneousPropertyJobs">
                             <div class="cat-list">
                                 <h3 class="cat-title">
-                                    <a href="#/viewclassfied/{{item.ClassifiedID}}">
+                                    <a href="#/ClassifiedsByCategory/{{category.ID}}">
                                         <img id="img" class="img-circle" ng-src="{{category.CategoryImage}}" alt="your image" width="30" height="30" />
                                         {{category.CategoryTitle}}
                                     </a>
@@ -44,7 +44,7 @@
                         <div class="col-md-4 col-sm-4" ng-repeat="category in Categories | filter:filterBeautyServicesOther">
                             <div class="cat-list">
                                 <h3 class="cat-title">
-                                    <a href="#/viewclassfied/{{item.ClassifiedID}}">
+                                    <a href="#/ClassifiedsByCategory/{{category.ID}}">
                                         <img id="img" class="img-circle" ng-src="{{category.CategoryImage}}" alt="your image" width="30" height="30" />
                                         {{category.CategoryTitle}}
                                     </a>
