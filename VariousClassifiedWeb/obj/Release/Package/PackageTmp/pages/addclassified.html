@@ -11,7 +11,7 @@
                     </h2>
                     <div class="row">
                         <div class="col-sm-12">
-                            <form class="form-horizontal">
+                            <form class="form-horizontal"  name="addClassified" role="form" novalidate>
                                 <fieldset>
 
                                     <div class="form-group">
@@ -35,30 +35,31 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="ClassifiedTitle">Ad title</label>
                                         <div class="col-md-8">                                      
-                                            <input id="ClassifiedTitle" name="ClassifiedTitle" placeholder="Ad title" class="form-control input-md"  ng-model="ClassifiedTitle" required="" type="text">
+                                            <input id="ClassifiedTitle" name="ClassifiedTitle" placeholder="Ad title" class="form-control input-md"  ng-model="ClassifiedTitle" ng-required="true" type="text">
                                             <span class="help-block">A great title needs at least 60 characters. </span>
+                                            <span class="help-block" ng-show="hasError('ClassifiedTitle', 'required')">Please enter classified title</span>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="ClassifiedDescription">Describe ad </label>
                                         <div class="col-md-8">                                            
-<textarea class="form-control" id="ClassifiedDescription" name="ClassifiedDescription" ng-model="ClassifiedDescription" >Describe
-                                                    what makes your ad unique</textarea>
+                                            <textarea class="form-control" id="ClassifiedDescription" name="ClassifiedDescription" ng-model="ClassifiedDescription" ng-required="true" >Describe what makes your ad unique</textarea>
+                                            <span class="help-block" ng-show="hasError('ClassifiedDescription', 'required')">Please enter classified description.</span>
                                         </div>
                                     </div>                               
 
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="ContactDetails">Contact Details</label>
                                         <div class="col-md-8">
-<textarea class="form-control" id="ContactDetails" name="ContactDetails" ng-model="ContactDetails"></textarea>
+                                            <textarea class="form-control" id="ContactDetails" name="ContactDetails" ng-model="ContactDetails"></textarea>
                                         </div>
                                     </div>   
 
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="Notes">Notes</label>
                                         <div class="col-md-8">
-<textarea class="form-control" id="Notes" name="Notes" ng-model="Notes"></textarea>
+                                             <textarea class="form-control" id="Notes" name="Notes" ng-model="Notes"></textarea>
                                         </div>
                                     </div>
 
@@ -69,13 +70,20 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label" >Active Between</label>
-                                        <div class="col-md-8">
-                                            <label class="control-label">From</label><input type="text" class="datepic" ng-model="FromDate">
-                                            <label class="control-label">To</label><input type="text" class="datepic" ng-model="ToDate">
+                                        <label class="col-md-3 control-label">Active Between</label>
+                                        <div>
+                                            <label class="control-label col-md-1">From</label>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control input-md datepic" ng-model="FromDate">  
+                                            </div>                                         
                                         </div>
+                                        <div>
+                                            <label class="control-label col-md-1">To</label>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control input-md datepic" ng-model="ToDate">
+                                            </div>
+                                        </div> 
                                     </div>
-
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="textarea"> Picture </label>
                                         <div class="col-md-8">

@@ -30,5 +30,6 @@ namespace VariousClassifiedWeb.Models
         public virtual DbSet<Reference> References { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Location> Locations { get; set; }
     }
 }

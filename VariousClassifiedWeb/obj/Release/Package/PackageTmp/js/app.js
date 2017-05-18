@@ -349,11 +349,21 @@ myApp.controller('ClassifiedsByCategoryController', ['$scope', '$log', '$routePa
 
 
 myApp.controller('editController', ['$scope', '$log', '$routeParams', '$rootScope', '$http', '$location', function ($scope, $log, $routeParams, $rootScope, $http, $location) {
+    $scope.submitted = false;
     $scope.initDatepicer = function () {
         $(function () {
             $(".datepic").datepicker();
         });
     }
+
+    $scope.hasError = function (field, validation) {
+
+        if (validation) {
+            return ($scope.editClassified[field].$dirty && $scope.editClassified[field].$error[validation]) || ($scope.submitted && $scope.editClassified[field].$error[validation]);
+        }
+        return ($scope.editClassified[field].$dirty && $scope.editClassified[field].$invalid) || ($scope.submitted && $scope.editClassified[field].$invalid);
+    };
+
 
     $http.get('/VariousClassifiedWeb/api/Categories')
         .success(function (result) {
@@ -363,7 +373,7 @@ myApp.controller('editController', ['$scope', '$log', '$routeParams', '$rootScop
     $http.get('/VariousClassifiedWeb/api', {
         params: { id: $routeParams.num }
     }).success(function (result) {
-        $scope.classified = result;
+        $scope.classified = result[0];       
         $scope.initDatepicer();
     });
     $scope.CategoryID = 0;
@@ -371,7 +381,13 @@ myApp.controller('editController', ['$scope', '$log', '$routeParams', '$rootScop
         if (angular.isUndefined($scope.IsActive)) {
             $scope.IsActive = false;
         }
-        $http.post('/VariousClassifiedWeb/api', { id: $scope.classified[0].ClassifiedID, ClassifiedTitle: $scope.classified[0].ClassifiedTitle, ClassifiedDescription: $scope.classified[0].ClassifiedDescription, CategoryID: $scope.classified[0].CategoryID, ClassifiedImage: $scope.classified[0].ClassfiedImage, ContactDetails: $scope.classified[0].ContactDetails, Notes: $scope.classified[0].Notes, IsActive: $scope.classified[0].IsActive, FromDate: $scope.classified[0].FromDate, ToDate: $scope.classified[0].ToDate, UserName: $rootScope.username })
+
+        if ($scope.editClassified.$invalid) {
+            $scope.submitted = true;
+            return;
+        }
+
+        $http.post('/VariousClassifiedWeb/api', { id: $scope.classified.ClassifiedID, ClassifiedTitle: $scope.classified.ClassifiedTitle, ClassifiedDescription: $scope.classified.ClassifiedDescription, CategoryID: $scope.classified.CategoryID, ClassifiedImage: $scope.classified.ClassfiedImage, ContactDetails: $scope.classified.ContactDetails, Notes: $scope.classified.Notes, IsActive: $scope.classified.IsActive, FromDate: $scope.classified.FromDate, ToDate: $scope.classified.ToDate, UserName: $rootScope.username })
             .success(function (result) {
                 if ($http.pendingRequests.length > 0) {
                 } else {
@@ -384,7 +400,7 @@ myApp.controller('editController', ['$scope', '$log', '$routeParams', '$rootScop
     };
 
     $scope.deleteRule = function () {
-        $http.post('/VariousClassifiedWeb/Api/Delete', { id: $scope.classified[0].ClassifiedID })
+        $http.post('/VariousClassifiedWeb/Api/Delete', { id: $scope.classified.ClassifiedID })
             .success(function (result) {
                 if ($http.pendingRequests.length > 0) {
                 } else {
@@ -411,7 +427,7 @@ myApp.controller('editController', ['$scope', '$log', '$routeParams', '$rootScop
                 return function (e) {
                     aImg.src = e.target.result;
                     document.getElementById("img").value = e.target.result;
-                    $scope.classified[0].ClassfiedImage = e.target.result;
+                    $scope.classified.ClassfiedImage = e.target.result;
                     $scope.$digest();
                 };
             })(img);
@@ -422,6 +438,7 @@ myApp.controller('editController', ['$scope', '$log', '$routeParams', '$rootScop
 }]);
 
 myApp.controller('addController', ['$scope', '$rootScope', '$http', '$location', function ($scope, $rootScope, $http, $location) {
+    $scope.submitted = false;
     if (angular.isUndefined($rootScope.username)) {
         var landingUrl = '/login';
         $location.url(landingUrl); 
@@ -442,9 +459,20 @@ myApp.controller('addController', ['$scope', '$rootScope', '$http', '$location',
             $scope.$apply(function ($scope) {
                 $scope.files = element.files;
             });
-        }
+        }       
+        $scope.hasError = function (field, validation) {
+            if (validation) {
+                return ($scope.addClassified[field].$dirty && $scope.addClassified[field].$error[validation]) || ($scope.submitted && $scope.addClassified[field].$error[validation]);
+            }
+            return ($scope.addClassified[field].$dirty && $scope.addClassified[field].$invalid) || ($scope.submitted && $scope.addClassified[field].$invalid);
+        };
+
         $scope.CategoryID = 0;
-        $scope.addRule = function () {
+        $scope.addRule = function () {            
+            if ($scope.addClassified.$invalid) {
+                $scope.submitted = true;
+                return;
+            }
             if (angular.isUndefined($scope.IsActive)) {
                 $scope.IsActive = false;
             }

@@ -311,6 +311,10 @@
     <Content Include="assets\fonts\fontello\fontello03a0.ttf" />
     <Content Include="assets\fonts\fontello\fontello03a0.woff" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="pages\addclassified.html" />
     <Content Include="pages\allclassifieds.html" />
@@ -321,6 +325,8 @@
     <Content Include="pages\main.html" />
     <Content Include="pages\userlist.html" />
     <Content Include="pages\viewclassfied.html" />
+    <Content Include="Scripts\dirPagination.js" />
+    <Content Include="Scripts\dirPagination.tpl.html" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -340,6 +346,9 @@
       <DependentUpon>VariousClassifiedDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Classified.cs">
+      <DependentUpon>VariousClassifiedDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Location.cs">
       <DependentUpon>VariousClassifiedDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Reference.cs">

@@ -39,6 +39,17 @@
                                             </div>
                                         </div>
 
+                                      
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="ClassifiedLocation">Location</label>
+                                            <div class="col-md-8">
+                                                <select ng-model="LocationID" ng-init="LocationID='1'" class="form-control">
+                                                    <option ng-repeat="x in Locations" value="{{x.ID}}" ng-selected="classified.LocationID==x.ID">{{x.LocationDescription}} {{x.Pincode}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="ClassifiedDescription">Describe ad </label>
                                             <div class="col-md-8">
@@ -47,6 +58,13 @@
                                                 <span class="help-block" ng-show="hasError('ClassifiedDescription', 'required')">Please enter classified description.</span>
                                             </div>
                                         </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="ClassifiedPrice">Price </label>
+                                            <div class="col-md-8">
+                                                <input class="form-control input-md" id="Price" name="Price" ng-model="classified.Price" type="number" />
+                                            </div>
+                                        </div> 
 
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="ContactDetails">Contact Details</label>

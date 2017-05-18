@@ -31,6 +31,16 @@
           <Property Name="Notes" Type="varchar(max)" />
           <Property Name="RefNo" Type="varchar" MaxLength="50" />
           <Property Name="UserID" Type="int" />
+          <Property Name="LocationID" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationDescription" Type="varchar" MaxLength="500" />
+          <Property Name="Pincode" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Reference">
           <Key>
@@ -69,6 +79,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Classified_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Classified" Type="Self.Classified" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Classified">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Classified_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Classified" Type="Self.Classified" Multiplicity="*" />
@@ -96,11 +118,16 @@
         <EntityContainer Name="VariousClassifiedDBModelStoreContainer">
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Classified" EntityType="Self.Classified" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reference" EntityType="Self.Reference" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Classified_Category" Association="Self.FK_Classified_Category">
             <End Role="Category" EntitySet="Category" />
+            <End Role="Classified" EntitySet="Classified" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Classified_Location" Association="Self.FK_Classified_Location">
+            <End Role="Location" EntitySet="Location" />
             <End Role="Classified" EntitySet="Classified" />
           </AssociationSet>
           <AssociationSet Name="FK_Classified_User" Association="Self.FK_Classified_User">
@@ -120,12 +147,12 @@
           <EntitySet Name="Categories" EntityType="VariousClassifiedDBModel.Category" />
           <EntitySet Name="Classifieds" EntityType="VariousClassifiedDBModel.Classified" />
           <EntitySet Name="References" EntityType="VariousClassifiedDBModel.Reference" />
+          <EntitySet Name="Roles" EntityType="VariousClassifiedDBModel.Role" />
+          <EntitySet Name="Users" EntityType="VariousClassifiedDBModel.User" />
           <AssociationSet Name="FK_Classified_Category" Association="VariousClassifiedDBModel.FK_Classified_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Classified" EntitySet="Classifieds" />
           </AssociationSet>
-          <EntitySet Name="Roles" EntityType="VariousClassifiedDBModel.Role" />
-          <EntitySet Name="Users" EntityType="VariousClassifiedDBModel.User" />
           <AssociationSet Name="FK_Classified_User" Association="VariousClassifiedDBModel.FK_Classified_User">
             <End Role="User" EntitySet="Users" />
             <End Role="Classified" EntitySet="Classifieds" />
@@ -133,6 +160,11 @@
           <AssociationSet Name="FK_User_Role" Association="VariousClassifiedDBModel.FK_User_Role">
             <End Role="Role" EntitySet="Roles" />
             <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="Locations" EntityType="VariousClassifiedDBModel.Location" />
+          <AssociationSet Name="FK_Classified_Location" Association="VariousClassifiedDBModel.FK_Classified_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Classified" EntitySet="Classifieds" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Category">
@@ -161,9 +193,12 @@
           <Property Name="ContactDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="RefNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Category" Relationship="VariousClassifiedDBModel.FK_Classified_Category" FromRole="Classified" ToRole="Category" />
           <Property Name="UserID" Type="Int32" />
+          <Property Name="LocationID" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Category" Relationship="VariousClassifiedDBModel.FK_Classified_Category" FromRole="Classified" ToRole="Category" />
           <NavigationProperty Name="User" Relationship="VariousClassifiedDBModel.FK_Classified_User" FromRole="Classified" ToRole="User" />
+          <NavigationProperty Name="Location" Relationship="VariousClassifiedDBModel.FK_Classified_Location" FromRole="Classified" ToRole="Location" />
         </EntityType>
         <EntityType Name="Reference">
           <Key>
@@ -171,6 +206,27 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NextRefNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="VariousClassifiedDBModel.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RoleID" Type="Int32" />
+          <Property Name="EMail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Classifieds" Relationship="VariousClassifiedDBModel.FK_Classified_User" FromRole="User" ToRole="Classified" />
+          <NavigationProperty Name="Role" Relationship="VariousClassifiedDBModel.FK_User_Role" FromRole="User" ToRole="Role" />
         </EntityType>
         <Association Name="FK_Classified_Category">
           <End Type="VariousClassifiedDBModel.Category" Role="Category" Multiplicity="0..1" />
@@ -184,27 +240,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Role">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="RoleName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Users" Relationship="VariousClassifiedDBModel.FK_User_Role" FromRole="Role" ToRole="User" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="RoleID" Type="Int32" />
-          <Property Name="EMail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IsActive" Type="Boolean" />
-          <NavigationProperty Name="Classifieds" Relationship="VariousClassifiedDBModel.FK_Classified_User" FromRole="User" ToRole="Classified" />
-          <NavigationProperty Name="Role" Relationship="VariousClassifiedDBModel.FK_User_Role" FromRole="User" ToRole="Role" />
-        </EntityType>
         <Association Name="FK_Classified_User">
           <End Type="VariousClassifiedDBModel.User" Role="User" Multiplicity="0..1" />
           <End Type="VariousClassifiedDBModel.Classified" Role="Classified" Multiplicity="*" />
@@ -229,6 +264,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Pincode" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Classifieds" Relationship="VariousClassifiedDBModel.FK_Classified_Location" FromRole="Location" ToRole="Classified" />
+        </EntityType>
+        <Association Name="FK_Classified_Location">
+          <End Type="VariousClassifiedDBModel.Location" Role="Location" Multiplicity="0..1" />
+          <End Type="VariousClassifiedDBModel.Classified" Role="Classified" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Classified">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -249,6 +305,8 @@
           <EntitySetMapping Name="Classifieds">
             <EntityTypeMapping TypeName="VariousClassifiedDBModel.Classified">
               <MappingFragment StoreEntitySet="Classified">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="RefNo" ColumnName="RefNo" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
@@ -288,6 +346,15 @@
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="VariousClassifiedDBModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="LocationDescription" ColumnName="LocationDescription" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

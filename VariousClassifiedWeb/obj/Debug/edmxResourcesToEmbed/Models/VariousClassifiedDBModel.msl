@@ -15,6 +15,8 @@
     <EntitySetMapping Name="Classifieds">
       <EntityTypeMapping TypeName="VariousClassifiedDBModel.Classified">
         <MappingFragment StoreEntitySet="Classified">
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="RefNo" ColumnName="RefNo" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
@@ -54,6 +56,15 @@
           <ScalarProperty Name="RoleID" ColumnName="RoleID" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="VariousClassifiedDBModel.Location">
+        <MappingFragment StoreEntitySet="Location">
+          <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+          <ScalarProperty Name="LocationDescription" ColumnName="LocationDescription" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

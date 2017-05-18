@@ -1,43 +1,61 @@
-<a href="#/addclassified">Add New Classified </a>
-<div class="row" ng-if="username=='ajanthan'">
-    <div class="col-md-12" >
-    User name<select ng-model="UserName" ng-change="MyDestiny(UserName)">
-<option ng-repeat="x in users"  value="{{x.UserName}}">{{x.UserName}}</option>
-</select>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-       Search: <input ng-model="searchText" class="form-control" placeholder="Search">
-    </div>
-</div>
-<div class="row" ng-repeat="rows in chunkedData | filter:searchText:strict">
-  <div class="col-md-3 portfolio-item" ng-repeat="item in rows" ng-minlength="0">
-      <div class="row">
-          <div class="row"><div class="col-md-0 col-sd-4"></div><div class="col-md-12 col-sd-8"><h4>{{item.ClassifiedTitle}}</h4></div></div>
-          <div class="row">
-             <div class="col-md-3">
-        <a href="#/viewclassfied/{{item.ClassifiedID}}">    
-                    <img class="img-responsive " src="http://placehold.it/50x50" alt="">
-                </a>
-             <a href="#/editclass/{{item.ClassifiedID}}">    
-                    Edit Classified
-                </a>
-         </div>
-           
-           <div class="col-md-9">
-               {{item.ClassifiedDescription}}
-         </div></div>
-  
-      </div>
-     
-                
+  <div class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 page-content col-thin-right">
+                <div class="inner-box category-content">
+                    <div class="row search-row animated fadeInUp">
+                        <div class="col-lg-12 col-sm-12 relative">
+                            <a href="#/addclassified">Add New Classified </a>
+                        </div>
+                    </div>
+
+                    <div class="row" ng-if="username=='ajanthan'">
+                        <div class="col-md-12">
+                            User name<select ng-model="UserName1" ng-init="UserName1='ajanthan'" ng-change="MyDestiny(UserName1)">
+                                <option ng-repeat="x in users" value="{{x.UserName}}">{{x.UserName}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="text" ng-model="searchText" class="form-control" placeholder="I'm looking for a ..." value="" />
+                        <span class="input-group-addon">
+                            <i class="fa fa-search" ng-click="MyDestiny(UserName1);"></i>
+                        </span>                        
+                    </div>                   
+                    <br />
+                    <div class="col-md-12 portfolio-item" ng-repeat="item in classifieds" ng-minlength="0">
+                        <div class="row  search-row ">
+                            <div class="col-md-3 well" style="min-height:120px">
+                                <a href="#/viewclassfied/{{item.ClassifiedID}}">
+                                    <img id="img" ng-src="{{item.ClassfiedImage}}" alt="your image" class="img-responsive" />                                    
+                                </a>
+                                <a href="#/editclass/{{item.ClassifiedID}}">
+                                    Edit Classified
+                                </a>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="label label-default">Classified Title</span>{{item.ClassifiedTitle}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="label label-default">Classified Description</span> {{item.ClassifiedDescription}}
+                                        <br />
+                                        <span>{{item.RefNo}}</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-         
-   
+        </div>
+    </div>
 </div>
 
 
-<ul class="pagination" ng-repeat="i in pagecount">  
-     <li><a href="#/main/{{i+1}}">{{i+1}}</a></li>    
-</ul>

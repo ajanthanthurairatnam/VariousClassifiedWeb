@@ -101,7 +101,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/01/2016 15:32:47</publishTime>
     </File>
     <File Include="assets/css/style.css">
-      <publishTime>11/01/2016 15:32:47</publishTime>
+      <publishTime>05/12/2017 21:58:50</publishTime>
     </File>
     <File Include="assets/fonts/fontawesome-webfont3295.eot">
       <publishTime>11/01/2016 15:32:47</publishTime>
@@ -707,7 +707,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/01/2016 15:32:47</publishTime>
     </File>
     <File Include="index.html">
-      <publishTime>05/10/2017 11:03:01</publishTime>
+      <publishTime>05/12/2017 22:19:38</publishTime>
     </File>
     <File Include="js/angular-route.min.js">
       <publishTime>03/11/2017 14:32:47</publishTime>
@@ -716,7 +716,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2017 14:32:22</publishTime>
     </File>
     <File Include="js/app.js">
-      <publishTime>05/10/2017 12:13:46</publishTime>
+      <publishTime>05/12/2017 23:16:53</publishTime>
     </File>
     <File Include="js/bootstrap.js">
       <publishTime>07/25/2016 15:53:28</publishTime>
@@ -743,7 +743,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/07/2017 22:35:02</publishTime>
     </File>
     <File Include="pages/addclassified.html">
-      <publishTime>05/10/2017 11:45:02</publishTime>
+      <publishTime>05/12/2017 21:42:08</publishTime>
     </File>
     <File Include="pages/allclassifieds.html">
       <publishTime>05/10/2017 12:32:27</publishTime>
@@ -752,7 +752,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/10/2017 08:54:58</publishTime>
     </File>
     <File Include="pages/editclassified.html">
-      <publishTime>05/10/2017 12:00:40</publishTime>
+      <publishTime>05/12/2017 23:27:05</publishTime>
     </File>
     <File Include="pages/edituser.html">
       <publishTime>05/10/2017 10:50:40</publishTime>

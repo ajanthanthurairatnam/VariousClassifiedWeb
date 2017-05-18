@@ -1,4 +1,5 @@
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute', 'angularUtils.directives.dirPagination']);
+
 
 myApp.config(function ($routeProvider) {
 
@@ -72,7 +73,7 @@ myApp.config(function ($routeProvider) {
             templateUrl: 'pages/classifiedsbycategory.html',
             controller: 'ClassifiedsByCategoryController'
         })
-
+     
 });
 
 myApp.controller('mainController', ['$scope', '$location', '$routeParams', '$rootScope', '$http', function ($scope, $location, $routeParams, $rootScope, $http) {
@@ -85,35 +86,17 @@ myApp.controller('mainController', ['$scope', '$location', '$routeParams', '$roo
             .success(function (result) {
                 $scope.users = result;
                 $scope.UserName = $rootScope.username;
-                $http.post('/VariousClassifiedWeb/api/pagecount', { UserName: $scope.UserName })
+                $http.post('/VariousClassifiedWeb/api/RetieveClassfied', { UserName: $scope.UserName })
                     .success(function (result) {
-                        $scope.pagecount = [];
-                        for (var i = 0; i < parseInt(result, 10); i++) {
-                            $scope.pagecount[i] = i;
-                        }
-                    });
-                $http.post('/VariousClassifiedWeb/api/RetieveClassfied', { UserName: $scope.UserName, page: $routeParams.page })
-                    .success(function (result) {
-                        $scope.classifieds = result;
-                        $scope.chunkedData = chunk(result, 4);
-
+                        $scope.classifieds = result;                       
                     })
             });
     }
 
-    $scope.MyDestiny = function (UserName) {        
-        $http.post('/VariousClassifiedWeb/api/pagecount', { UserName: UserName })
-            .success(function (result) {
-                $scope.pagecount = [];
-                for (var i = 0; i < parseInt(result, 10); i++) {
-                    $scope.pagecount[i] = i;
-                }
-            });
-        $http.post('/VariousClassifiedWeb/api/RetieveClassfied', { UserName: UserName, page: 1 })
+    $scope.MyDestiny = function (UserName1) { 
+        $http.post('/VariousClassifiedWeb/api/RetieveClassfied', { UserName: UserName1, searchText: $scope.searchText })
             .success(function (result) {
                 $scope.classifieds = result;
-                $scope.chunkedData = chunk(result, 4);
-
             })
 
     };
@@ -316,8 +299,14 @@ myApp.controller('allclassifiedsController', ['$scope', '$location', '$http', fu
     $scope.filterMiscellaneousPropertyJobs = function (category) {
         return category.CategoryTitle == 'Miscellaneous' || category.CategoryTitle == 'Property' || category.CategoryTitle == 'Jobs';
     };
-    $scope.filterBeautyServicesOther = function (category) {
-        return category.CategoryTitle == 'Beauty' || category.CategoryTitle == 'Services' || category.CategoryTitle == 'Other';
+    $scope.filterBeautyServicesVehicle = function (category) {
+        return category.CategoryTitle == 'Beauty' || category.CategoryTitle == 'Services' || category.CategoryTitle == 'Vehicle';
+    };
+    $scope.filterFoodHolidayPet = function (category) {
+        return category.CategoryTitle == 'Food' || category.CategoryTitle == 'Holiday' || category.CategoryTitle == 'Pet';
+    };
+    $scope.filterBooksAgricultureElecronics = function (category) {
+        return category.CategoryTitle == 'Books' || category.CategoryTitle == 'Agriculture' || category.CategoryTitle == 'Elecronics';
     };
 }]);
 
@@ -331,8 +320,12 @@ myApp.controller('viewController', ['$scope', '$log', '$routeParams', '$http', f
 }]);
 
 myApp.controller('ClassifiedsByCategoryController', ['$scope', '$log', '$routeParams', '$http', function ($scope, $log, $routeParams, $http) {
+    $http.get('/VariousClassifiedWeb/api/Locations')
+        .success(function (result) {
+            $scope.Locations = result;
+        });
     $http.get('/VariousClassifiedWeb/api/ClassifiedsByCategoryID', {
-        params: { id: $routeParams.num }
+        params: { id: $routeParams.num}
     }).success(function (result) {
         if (angular.isUndefined($routeParams.num)) {
             $scope.showall = 1;
@@ -341,10 +334,21 @@ myApp.controller('ClassifiedsByCategoryController', ['$scope', '$log', '$routePa
             $scope.showall = 0;
         }
 
-        $scope.classified = result;
-        $scope.chunkedData = chunk(result, 2);
-
-    });
+        $scope.classifieds= result;     
+        });
+    $scope.searchClassifieds = function () {
+        $http.post('/VariousClassifiedWeb/Api/ClassifiedsByCategoryID', { categoryid: $routeParams.num, searchText: $scope.searchText, LocationID:$scope.LocationID})
+            .success(function (result) {
+               
+                if (angular.isUndefined($routeParams.num)) {
+                    $scope.showall = 1;
+                }
+                else {
+                    $scope.showall = 0;
+                }
+                $scope.classifieds = result;   
+            })
+    };
 }]);
 
 
@@ -368,7 +372,10 @@ myApp.controller('editController', ['$scope', '$log', '$routeParams', '$rootScop
     $http.get('/VariousClassifiedWeb/api/Categories')
         .success(function (result) {
             $scope.Categories = result;
-
+        });
+    $http.get('/VariousClassifiedWeb/api/Locations')
+        .success(function (result) {
+            $scope.Locations = result;
         });
     $http.get('/VariousClassifiedWeb/api', {
         params: { id: $routeParams.num }
@@ -387,7 +394,7 @@ myApp.controller('editController', ['$scope', '$log', '$routeParams', '$rootScop
             return;
         }
 
-        $http.post('/VariousClassifiedWeb/api', { id: $scope.classified.ClassifiedID, ClassifiedTitle: $scope.classified.ClassifiedTitle, ClassifiedDescription: $scope.classified.ClassifiedDescription, CategoryID: $scope.classified.CategoryID, ClassifiedImage: $scope.classified.ClassfiedImage, ContactDetails: $scope.classified.ContactDetails, Notes: $scope.classified.Notes, IsActive: $scope.classified.IsActive, FromDate: $scope.classified.FromDate, ToDate: $scope.classified.ToDate, UserName: $rootScope.username })
+        $http.post('/VariousClassifiedWeb/api', { id: $scope.classified.ClassifiedID, ClassifiedTitle: $scope.classified.ClassifiedTitle, ClassifiedDescription: $scope.classified.ClassifiedDescription, CategoryID: $scope.classified.CategoryID, ClassifiedImage: $scope.classified.ClassfiedImage, ContactDetails: $scope.classified.ContactDetails, Notes: $scope.classified.Notes, IsActive: $scope.classified.IsActive, FromDate: $scope.classified.FromDate, ToDate: $scope.classified.ToDate, UserName: $rootScope.username, LocationID: $scope.LocationID, Price: $scope.Price })
             .success(function (result) {
                 if ($http.pendingRequests.length > 0) {
                 } else {
@@ -448,6 +455,10 @@ myApp.controller('addController', ['$scope', '$rootScope', '$http', '$location',
             .success(function (result) {
                 $scope.Categories = result;
             });
+        $http.get('/VariousClassifiedWeb/api/Locations')
+            .success(function (result) {
+                $scope.Locations = result;
+            });
         $http.get('/VariousClassifiedWeb/api/GetReferenceNo')
             .success(function (result) {
                 $scope.Reference = result;
@@ -476,7 +487,7 @@ myApp.controller('addController', ['$scope', '$rootScope', '$http', '$location',
             if (angular.isUndefined($scope.IsActive)) {
                 $scope.IsActive = false;
             }
-            $http.post('/VariousClassifiedWeb/api', { ClassifiedTitle: $scope.ClassifiedTitle, ClassifiedDescription: $scope.ClassifiedDescription, CategoryID: $scope.CategoryID, ClassifiedImage: $scope.ClassfiedImage, IsActive: $scope.IsActive, ContactDetails: $scope.ContactDetails, Notes: $scope.Notes, RefNo: $scope.Reference[0].NextRefNo, FromDate: $scope.FromDate, ToDate: $scope.ToDate, UserName: $rootScope.username })
+            $http.post('/VariousClassifiedWeb/api', { ClassifiedTitle: $scope.ClassifiedTitle, ClassifiedDescription: $scope.ClassifiedDescription, CategoryID: $scope.CategoryID, ClassifiedImage: $scope.ClassfiedImage, IsActive: $scope.IsActive, ContactDetails: $scope.ContactDetails, Notes: $scope.Notes, RefNo: $scope.Reference[0].NextRefNo, FromDate: $scope.FromDate, ToDate: $scope.ToDate, UserName: $rootScope.username, LocationID: $scope.LocationID, Price: $scope.Price })
                 .success(function (result) {
                     if ($http.pendingRequests.length > 0) {
                     } else {

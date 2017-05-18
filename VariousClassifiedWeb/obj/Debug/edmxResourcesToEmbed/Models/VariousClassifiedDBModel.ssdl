@@ -26,6 +26,16 @@
     <Property Name="Notes" Type="varchar(max)" />
     <Property Name="RefNo" Type="varchar" MaxLength="50" />
     <Property Name="UserID" Type="int" />
+    <Property Name="LocationID" Type="int" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocationDescription" Type="varchar" MaxLength="500" />
+    <Property Name="Pincode" Type="varchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="Reference">
     <Key>
@@ -64,6 +74,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Classified_Location">
+    <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+    <End Role="Classified" Type="Self.Classified" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Classified">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Classified_User">
     <End Role="User" Type="Self.User" Multiplicity="0..1" />
     <End Role="Classified" Type="Self.Classified" Multiplicity="*" />
@@ -91,11 +113,16 @@
   <EntityContainer Name="VariousClassifiedDBModelStoreContainer">
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Classified" EntityType="Self.Classified" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reference" EntityType="Self.Reference" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Classified_Category" Association="Self.FK_Classified_Category">
       <End Role="Category" EntitySet="Category" />
+      <End Role="Classified" EntitySet="Classified" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Classified_Location" Association="Self.FK_Classified_Location">
+      <End Role="Location" EntitySet="Location" />
       <End Role="Classified" EntitySet="Classified" />
     </AssociationSet>
     <AssociationSet Name="FK_Classified_User" Association="Self.FK_Classified_User">
